@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阳前 (Qian Yang) | 视觉传达与品牌设计作品集</title>
+    <!-- Tailwind + Google Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        galleryBg: '#F9F9FB',
+                        galleryCard: '#FFFFFF',
+                        primaryText: '#111111',
+                        subtext: '#6E6E73',
+                        accent: '#2563EB',
+                        cardBorder: 'rgba(0,0,0,0.06)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans SC', 'sans-serif'],
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            background-color: #F9F9FB;
+            color: #111111;
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+        }
+        ::selection { background: #111; color: #fff; }
+        .light-card {
+            background: #fff;
+            border: 1px solid rgba(0,0,0,0.06);
+            box-shadow: 0 4px 20px -2px rgba(0,0,0,0.03);
+            transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+        }
+        .light-card:hover {
+            box-shadow: 0 12px 30px -4px rgba(0,0,0,0.08);
+            transform: translateY(-4px);
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1),
+                        transform 0.8s cubic-bezier(0.16,1,0.3,1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .nav-link {
+            @apply text-xs tracking-widest uppercase text-subtext font-medium hover:text-black transition-colors;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- ========== 导航栏 ========== -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-black/5 px-6 py-4 flex justify-between items-center">
+        <a href="#" class="text-sm font-semibold tracking-wider uppercase flex items-center gap-2 group">
+            <span class="w-2 h-2 rounded-full bg-accent group-hover:scale-150 transition-transform duration-300"></span>
+            <span class="tracking-widest">阳前 QIAN YANG</span>
+        </a>
+        <div class="hidden md:flex gap-8 nav-link">
+            <a href="#works" class="nav-link">01. Works / 项目</a>
+            <a href="#lab" class="nav-link">02. Lab / 探索</a>
+            <a href="#process" class="nav-link">03. Process / 流程</a>
+            <a href="#about" class="nav-link">04. About / 关于</a>
+            <a href="#contact" class="nav-link">05. Contact / 联系</a>
+        </div>
+    </nav>
+
+    <!-- ========== Hero 首页首屏 ========== -->
+    <section class="min-h-screen flex flex-col justify-center px-6 md:px-16 pt-24 pb-12 max-w-7xl mx-auto">
+        <div class="reveal inline-flex items-center px-3 py-1 rounded-full text-xs tracking-widest text-subtext bg-black/5 mb-6 w-fit uppercase font-medium">
+            Visual Communication Designer
+        </div>
+        <h1 class="reveal text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-none mb-6 text-primaryText">
+            Brand Identity &<br>
+            <span class="font-normal italic">Visual Storytelling.</span>
+        </h1>
+        <p class="reveal text-lg md:text-xl text-subtext font-light max-w-2xl mb-12 leading-relaxed">
+            Shaping Meaningful Brands Through Visual Precision.<br>
+            <span class="text-sm md:text-base text-subtext/80">我是阳前，致力于用精准的视觉语言、扎实的版式逻辑与系统化思维，打造贴合商业需求与文化深度的品牌视觉系统。</span>
+        </p>
+        <div class="reveal flex gap-4 items-center flex-wrap">
+            <a href="#works" class="px-6 py-3 bg-black text-white text-xs font-semibold tracking-widest uppercase rounded-full hover:bg-accent hover:shadow-lg active:scale-95 transition-all duration-300">
+                Explore Works / 查看作品
+            </a>
+            <a href="#contact" class="px-6 py-3 border border-black/20 text-xs font-semibold tracking-widest uppercase rounded-full hover:border-black hover:bg-black/5 active:scale-95 transition-all duration-300">
+                Get in Touch / 联系沟通
+            </a>
+        </div>
+    </section>
+
+    <!-- ========== 精选项目 ========== -->
+    <section id="works" class="py-24 px-6 md:px-16 max-w-7xl mx-auto border-t border-black/5">
+        <div class="reveal flex justify-between items-end mb-16">
+            <div>
+                <span class="text-xs tracking-widest text-subtext uppercase font-semibold">01 / SELECTED WORKS</span>
+                <h2 class="text-2xl md:text-4xl font-light mt-2">精选品牌项目</h2>
+            </div>
+            <span class="text-xs text-subtext uppercase hidden sm:inline-block">Click card to view details</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
+
+            <!-- 白尘美术馆 -->
+            <a href="./项目1.html" class="reveal group block cursor-pointer">
+                <div class="relative overflow-hidden rounded-xl aspect-[4/3] bg-galleryCard mb-4 light-card">
+                    <img src="./images/project1-cover.jpg (白尘美术馆封面).jpg"
+                         alt="白尘美术馆品牌视觉项目封面"
+                         loading="lazy"
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-black">2024</div>
+                    <div class="absolute bottom-4 right-4 bg-black/80 text-white backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1">
+                        查看完整作品 ↗
+                    </div>
+                </div>
+                <div class="flex justify-between items-start gap-4">
+                    <div class="min-w-0">
+                        <h3 class="text-xl font-medium group-hover:text-accent transition-colors truncate">WHITE DUST MUSEUM / 白尘美术馆</h3>
+                        <p class="text-sm text-subtext mt-1 truncate">Brand Identity System / 品牌视觉识别系统与规范手册</p>
+                    </div>
+                    <span class="text-xs border border-black/10 px-2.5 py-1 rounded-full text-subtext shrink-0">Art Space</span>
+                </div>
+            </a>
+
+            <!-- 一菓 ICHIKA -->
+            <a href="./项目2.html" class="reveal group block cursor-pointer">
+                <div class="relative overflow-hidden rounded-xl aspect-[4/3] bg-galleryCard mb-4 light-card">
+                    <img src="./images/project2-cover.jpg (一菓封面).jpg"
+                         alt="一菓 ICHIKA 品牌视觉项目封面"
+                         loading="lazy"
+                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out">
+                    <div class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-black">2024</div>
+                    <div class="absolute bottom-4 right-4 bg-black/80 text-white backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center gap-1">
+                        查看完整作品 ↗
+                    </div>
+                </div>
+                <div class="flex justify-between items-start gap-4">
+                    <div class="min-w-0">
+                        <h3 class="text-xl font-medium group-hover:text-accent transition-colors truncate">ICHIKA / 一菓</h3>
+                        <p class="text-sm text-subtext mt-1 truncate">Wabi-sabi Branding & Packaging / 侘寂美学与日式甜品包装</p>
+                    </div>
+                    <span class="text-xs border border-black/10 px-2.5 py-1 rounded-full text-subtext shrink-0">Food &amp; Lifestyle</span>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- ========== 视觉实验室 ========== -->
+    <section id="lab" class="py-24 px-6 md:px-16 max-w-7xl mx-auto border-t border-black/5">
+        <div class="reveal mb-16">
+            <span class="text-xs tracking-widest text-subtext uppercase font-semibold">02 / VISUAL LAB</span>
+            <h2 class="text-2xl md:text-4xl font-light mt-2">视觉碎片与衍生</h2>
+            <p class="text-sm text-subtext mt-2">字体探索 · 质感研究 · 形态实验 · 材质尝试</p>
+        </div>
+        <div class="reveal grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <div class="bg-galleryCard rounded-xl overflow-hidden light-card group cursor-pointer p-3 md:p-4">
+                <img src="./images/lab-type.png"
+                     alt="字体探索"
+                     loading="lazy"
+                     class="w-full h-48 md:h-64 object-contain group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="bg-galleryCard rounded-xl overflow-hidden light-card group cursor-pointer p-3 md:p-4">
+                <img src="./images/lab-texture.png"
+                     alt="质感研究"
+                     loading="lazy"
+                     class="w-full h-48 md:h-64 object-contain group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="bg-galleryCard rounded-xl overflow-hidden light-card group cursor-pointer p-3 md:p-4">
+                <img src="./images/lab-form.png"
+                     alt="形态实验"
+                     loading="lazy"
+                     class="w-full h-48 md:h-64 object-contain group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="bg-galleryCard rounded-xl overflow-hidden light-card group cursor-pointer p-3 md:p-4">
+                <img src="./images/lab-material.png"
+                     alt="材质尝试"
+                     loading="lazy"
+                     class="w-full h-48 md:h-64 object-contain group-hover:scale-105 transition-transform duration-500">
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 设计流程 ========== -->
+    <section id="process" class="py-24 px-6 md:px-16 max-w-7xl mx-auto border-t border-black/5">
+        <div class="reveal mb-16">
+            <span class="text-xs tracking-widest text-subtext uppercase font-semibold">03 / MY APPROACH</span>
+            <h2 class="text-2xl md:text-4xl font-light mt-2">品牌构建流程</h2>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            <div class="reveal light-card p-6 rounded-xl">
+                <span class="text-accent text-xs font-mono font-bold">STEP 01</span>
+                <h3 class="text-lg font-medium mt-4">Insight &amp; Strategy</h3>
+                <h4 class="text-xs text-subtext mb-2">需求理解与调研</h4>
+                <p class="text-xs text-subtext leading-relaxed">准确理解商业或文化调性，进行色彩构成与视觉语言逻辑推演。</p>
+            </div>
+            <div class="reveal light-card p-6 rounded-xl" style="transition-delay:100ms">
+                <span class="text-accent text-xs font-mono font-bold">STEP 02</span>
+                <h3 class="text-lg font-medium mt-4">Concept &amp; Identity</h3>
+                <h4 class="text-xs text-subtext mb-2">标志与 VI 搭建</h4>
+                <p class="text-xs text-subtext leading-relaxed">精准计算标志保护区与比例网格，构建严谨的 VI 标志与色彩规范。</p>
+            </div>
+            <div class="reveal light-card p-6 rounded-xl" style="transition-delay:200ms">
+                <span class="text-accent text-xs font-mono font-bold">STEP 03</span>
+                <h3 class="text-lg font-medium mt-4">Application System</h3>
+                <h4 class="text-xs text-subtext mb-2">多触点物料延展</h4>
+                <p class="text-xs text-subtext leading-relaxed">覆盖海报排版、包装印刷、风吕敷/帆布袋及空间场景全套视觉落地。</p>
+            </div>
+            <div class="reveal light-card p-6 rounded-xl" style="transition-delay:300ms">
+                <span class="text-accent text-xs font-mono font-bold">STEP 04</span>
+                <h3 class="text-lg font-medium mt-4">Delivery &amp; Specs</h3>
+                <h4 class="text-xs text-subtext mb-2">规范与高效执行</h4>
+                <p class="text-xs text-subtext leading-relaxed">编写规范手册，把控材质、工艺与网格系统，确保高效协同落地。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 关于我 ========== -->
+    <section id="about" class="py-24 px-6 md:px-16 max-w-7xl mx-auto border-t border-black/5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+            <div class="reveal">
+                <span class="text-xs tracking-widest text-subtext uppercase font-semibold">04 / ABOUT &amp; EDUCATION</span>
+                <h2 class="text-3xl font-light mt-2 mb-6">阳前 (Qian Yang)</h2>
+                <p class="text-sm text-subtext leading-relaxed mb-6">
+                    视觉传达设计专业背景，拥有扎实的视觉设计与品牌设计理论基础。精通色彩搭配、构图逻辑与视觉排版规范，擅长结合品牌调性输出适配的视觉方案，设计风格干净整洁，贴合商业落地需求。
+                </p>
+                <div class="light-card p-6 rounded-xl space-y-2">
+                    <span class="text-xs text-accent font-mono uppercase font-bold">Education / 教育背景</span>
+                    <h3 class="text-base font-medium">视觉传达设计专业</h3>
+                    <p class="text-xs font-semibold text-primaryText">2024.09 – 2028.06</p>
+                    <p class="text-xs text-subtext leading-relaxed pt-2">
+                        系统学习平面设计、版式设计、色彩构成、标志设计、VI品牌设计、视觉创意与数字媒体设计等专业课程。
+                    </p>
+                </div>
+            </div>
+            <div class="reveal space-y-8" style="transition-delay:150ms">
+                <div>
+                    <h3 class="text-xs uppercase tracking-widest text-subtext font-semibold mb-4">Core Competencies / 核心能力</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="light-card px-3 py-1.5 text-xs rounded-full">VI 品牌视觉系统搭建</span>
+                        <span class="light-card px-3 py-1.5 text-xs rounded-full">标志与网格规范 (Logo Spec)</span>
+                        <span class="light-card px-3 py-1.5 text-xs rounded-full">海报设计与版式排版</span>
+                        <span class="light-card px-3 py-1.5 text-xs rounded-full">品牌视觉物料与包装设计</span>
+                        <span class="light-card px-3 py-1.5 text-xs rounded-full">色彩搭配与构图逻辑</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xs uppercase tracking-widest text-subtext font-semibold mb-4">Software &amp; Tools / 软件工具</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="light-card px-3 py-1.5 text-xs rounded-lg font-medium">Photoshop</span>
+                        <span class="light-card px-3 py-1.5 text-xs rounded-lg font-medium">Illustrator</span>
+                        <span class="light-card px-3 py-1.5 text-xs rounded-lg font-medium">MS Office Kit</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xs uppercase tracking-widest text-subtext font-semibold mb-2">Target Roles / 求职意向</h3>
+                    <p class="text-sm font-medium text-black">视觉传达设计 / 平面设计 / 品牌设计相关岗位</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== 联系方式 ========== -->
+    <footer id="contact" class="py-24 px-6 md:px-16 max-w-7xl mx-auto border-t border-black/5 text-center">
+        <div class="reveal">
+            <span class="text-xs tracking-widest text-subtext uppercase font-semibold">05 / GET IN TOUCH</span>
+            <h2 class="text-3xl md:text-5xl font-light mt-4 mb-8">Let&rsquo;s build something<br>extraordinary together.</h2>
+            <div class="space-y-3 mb-12">
+                <p class="text-sm text-subtext">电话：<a href="tel:13606768840" class="text-black font-medium hover:text-accent transition-colors">13606768840</a></p>
+                <div class="flex flex-col md:flex-row justify-center gap-4 text-sm md:text-base">
+                    <a href="mailto:2023645095@qq.com" class="underline decoration-accent decoration-2 underline-offset-8 hover:text-accent transition-colors">2023645095@qq.com</a>
+                    <span class="hidden md:inline text-subtext">/</span>
+                    <a href="mailto:yq20851121@gmail.com" class="underline decoration-accent decoration-2 underline-offset-8 hover:text-accent transition-colors">yq20851121@gmail.com</a>
+                </div>
+            </div>
+            <div class="flex justify-center gap-8 text-xs text-subtext font-medium">
+                <a href="#" class="hover:text-black transition-colors">Behance</a>
+                <a href="#" class="hover:text-black transition-colors">Xiaohongshu (小红书)</a>
+                <a href="#" class="hover:text-black transition-colors">Download CV (PDF)</a>
+            </div>
+            <p class="text-[10px] text-subtext/60 mt-12">&copy; 2026 Qian Yang. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ========== 脚本 ========== -->
+    <script>
+        // 滚动显现动画
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver(
+                entries => entries.forEach(e => e.isIntersecting && e.target.classList.add('active')),
+                { root: null, rootMargin: '0px', threshold: 0.15 }
+            );
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+        // 导航栏滚动阴影增强
+        let ticking = false;
+        document.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    const nav = document.getElementById('navbar');
+                    nav.style.borderColor = window.scrollY > 20 ? 'rgba(0,0,0,0.1)' : 'rgba(0,0,0,0.05)';
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+    </script>
+</body>
+</html>

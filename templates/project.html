@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="{{项目摘要}}" name="description"/>
+<meta content="#f9f9fb" name="theme-color"/>
+<title>{{当前项目.名称}} | {{个人资料.姓名}} ({{个人资料.英文名}})</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Noto+Sans+SC:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="./assets/site.css" rel="stylesheet"/>
+<script defer="" src="./assets/site.js">
+</script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">
+   跳到主要内容
+  </a>
+<div class="case-page">
+<header class="case-nav">
+<a href="./index.html">
+     ← 返回首页
+    </a>
+<nav aria-label="项目导航">
+<a href="./index.html#works">
+      全部项目
+     </a>
+<a href="./index.html#contact">
+      联系
+     </a>
+</nav>
+</header>
+<main id="main">
+<section aria-labelledby="case-heading" class="case-hero">
+<div>
+<div class="eyebrow">{{当前项目.项目标签}} · {{当前项目.年份}}</div>
+<h1 id="case-heading">{{当前项目.名称}}</h1>
+<p class="case-subtitle">{{当前项目.英文副标题}}</p>
+<dl class="case-meta">
+<div>
+<dt>
+         年份
+        </dt>
+<dd>{{当前项目.年份}}</dd>
+</div>
+<div>
+<dt>
+         类别
+        </dt>
+<dd>{{当前项目.类别}}</dd>
+</div>
+<div>
+<dt>
+         服务范围
+        </dt>
+<dd>{{当前项目.服务范围}}</dd>
+</div>
+</dl>
+</div>
+<figure class="case-cover">{{{项目封面}}}</figure>
+</section>
+<section aria-labelledby="overview-heading" class="case-section">
+<h2 id="overview-heading">
+      项目概述
+     </h2>
+<div class="case-prose">{{{项目概述}}}</div>
+</section>
+<section aria-labelledby="scope-heading" class="case-section">
+<h2 id="scope-heading">
+      项目交付内容
+     </h2>
+<ol class="scope-list">{{{交付清单}}}</ol>
+</section>
+<section aria-labelledby="pdf-heading" class="case-section">
+<div class="pdf-panel">
+<div>
+<div class="eyebrow">
+        Complete works
+       </div>
+<h2 id="pdf-heading">
+        查看完整作品集
+       </h2>
+<p>{{当前项目.PDF说明}} · PDF · {{PDF大小}} MB</p>
+</div>
+<a class="button" href="{{当前项目.PDF}}" rel="noopener" target="_blank">
+       下载 / 查看 PDF ↗
+      </a>
+</div>
+</section>
+<nav aria-label="案例切换" class="case-pagination">{{{项目切换}}}</nav>
+</main>
+<footer class="site-footer">
+<p>© {{年份}} {{个人资料.英文名}}. All rights reserved.</p>
+<a href="#top">
+     返回顶部 ↑
+    </a>
+</footer>
+</div>
+</body>
+</html>

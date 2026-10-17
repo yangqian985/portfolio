@@ -1,0 +1,130 @@
+[
+  {
+    "file": "white-dust-logo.jpg",
+    "source": "项目1.pdf",
+    "pages": [
+      2
+    ],
+    "extraction": "完整嵌入图像，等比例缩小，无裁切"
+  },
+  {
+    "file": "white-dust-standards.jpg",
+    "source": "项目1.pdf",
+    "pages": [
+      3
+    ],
+    "extraction": "完整嵌入图像，等比例缩小，无裁切"
+  },
+  {
+    "file": "white-dust-graphics.jpg",
+    "source": "项目1.pdf",
+    "pages": [
+      4
+    ],
+    "extraction": "完整嵌入图像，等比例缩小，无裁切"
+  },
+  {
+    "file": "white-dust-colors.jpg",
+    "source": "项目1.pdf",
+    "pages": [
+      5
+    ],
+    "extraction": "完整嵌入图像，等比例缩小，无裁切"
+  },
+  {
+    "file": "white-dust-stationery.jpg",
+    "source": "项目1.pdf",
+    "pages": [
+      3
+    ],
+    "extraction": "完整嵌入图像，等比例缩小，无裁切"
+  },
+  {
+    "file": "white-dust-cards.jpg",
+    "source": "项目1.pdf",
+    "pages": [
+      6
+    ],
+    "extraction": "完整嵌入图像，等比例缩小，无裁切"
+  },
+  {
+    "file": "white-dust-poster.jpg",
+    "source": "项目1.pdf",
+    "pages": [
+      7
+    ],
+    "extraction": "完整嵌入图像，等比例缩小，无裁切"
+  },
+  {
+    "file": "white-dust-outdoor.jpg",
+    "source": "项目1.pdf",
+    "pages": [
+      8
+    ],
+    "extraction": "完整嵌入图像，等比例缩小，无裁切"
+  },
+  {
+    "file": "ichika-identity.jpg",
+    "source": "项目2.pdf",
+    "pages": [
+      2
+    ],
+    "extraction": "完整嵌入图像，等比例缩小，无裁切"
+  },
+  {
+    "file": "ichika-collage.jpg",
+    "source": "项目2.pdf",
+    "pages": [
+      3
+    ],
+    "extraction": "完整嵌入图像，等比例缩小，无裁切"
+  },
+  {
+    "file": "ichika-product.jpg",
+    "source": "项目2.pdf",
+    "pages": [
+      4
+    ],
+    "extraction": "完整嵌入图像，等比例缩小，无裁切"
+  },
+  {
+    "file": "ichika-packaging.jpg",
+    "source": "项目2.pdf",
+    "pages": [
+      5
+    ],
+    "extraction": "完整嵌入图像，等比例缩小，无裁切"
+  },
+  {
+    "file": "ichika-tableware.jpg",
+    "source": "项目2.pdf",
+    "pages": [
+      6
+    ],
+    "extraction": "完整嵌入图像，等比例缩小，无裁切"
+  },
+  {
+    "file": "ichika-menu.jpg",
+    "source": "项目2.pdf",
+    "pages": [
+      7
+    ],
+    "extraction": "完整嵌入图像，等比例缩小，无裁切"
+  },
+  {
+    "file": "ichika-menu-scene.jpg",
+    "source": "项目2.pdf",
+    "pages": [
+      8
+    ],
+    "extraction": "完整嵌入图像，等比例缩小，无裁切"
+  },
+  {
+    "file": "ichika-storefront.jpg",
+    "source": "项目2.pdf",
+    "pages": [
+      9
+    ],
+    "extraction": "完整嵌入图像，等比例缩小，无裁切"
+  }
+]

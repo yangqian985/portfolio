@@ -1,0 +1,382 @@
+{
+  "./images/web/white-dust-logo.jpg": {
+    "fallback": "./images/web/white-dust-logo.jpg",
+    "width": 1600,
+    "height": 1563,
+    "webp": [
+      {
+        "path": "./images/web/white-dust-logo-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/white-dust-logo-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/white-dust-logo-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "./images/web/white-dust-standards.jpg": {
+    "fallback": "./images/web/white-dust-standards.jpg",
+    "width": 1600,
+    "height": 873,
+    "webp": [
+      {
+        "path": "./images/web/white-dust-standards-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/white-dust-standards-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/white-dust-standards-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "./images/web/white-dust-graphics.jpg": {
+    "fallback": "./images/web/white-dust-graphics.jpg",
+    "width": 1536,
+    "height": 1024,
+    "webp": [
+      {
+        "path": "./images/web/white-dust-graphics-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/white-dust-graphics-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/white-dust-graphics-1536.webp",
+        "width": 1536
+      }
+    ]
+  },
+  "./images/web/white-dust-colors.jpg": {
+    "fallback": "./images/web/white-dust-colors.jpg",
+    "width": 1279,
+    "height": 1600,
+    "webp": [
+      {
+        "path": "./images/web/white-dust-colors-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/white-dust-colors-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/white-dust-colors-1279.webp",
+        "width": 1279
+      }
+    ]
+  },
+  "./images/web/white-dust-stationery.jpg": {
+    "fallback": "./images/web/white-dust-stationery.jpg",
+    "width": 1600,
+    "height": 1067,
+    "webp": [
+      {
+        "path": "./images/web/white-dust-stationery-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/white-dust-stationery-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/white-dust-stationery-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "./images/web/white-dust-cards.jpg": {
+    "fallback": "./images/web/white-dust-cards.jpg",
+    "width": 1536,
+    "height": 1024,
+    "webp": [
+      {
+        "path": "./images/web/white-dust-cards-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/white-dust-cards-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/white-dust-cards-1536.webp",
+        "width": 1536
+      }
+    ]
+  },
+  "./images/web/white-dust-poster.jpg": {
+    "fallback": "./images/web/white-dust-poster.jpg",
+    "width": 1086,
+    "height": 1448,
+    "webp": [
+      {
+        "path": "./images/web/white-dust-poster-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/white-dust-poster-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/white-dust-poster-1086.webp",
+        "width": 1086
+      }
+    ]
+  },
+  "./images/web/white-dust-outdoor.jpg": {
+    "fallback": "./images/web/white-dust-outdoor.jpg",
+    "width": 1086,
+    "height": 1448,
+    "webp": [
+      {
+        "path": "./images/web/white-dust-outdoor-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/white-dust-outdoor-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/white-dust-outdoor-1086.webp",
+        "width": 1086
+      }
+    ]
+  },
+  "./images/web/ichika-identity.jpg": {
+    "fallback": "./images/web/ichika-identity.jpg",
+    "width": 1254,
+    "height": 1254,
+    "webp": [
+      {
+        "path": "./images/web/ichika-identity-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/ichika-identity-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/ichika-identity-1254.webp",
+        "width": 1254
+      }
+    ]
+  },
+  "./images/web/ichika-collage.jpg": {
+    "fallback": "./images/web/ichika-collage.jpg",
+    "width": 1195,
+    "height": 1600,
+    "webp": [
+      {
+        "path": "./images/web/ichika-collage-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/ichika-collage-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/ichika-collage-1195.webp",
+        "width": 1195
+      }
+    ]
+  },
+  "./images/web/ichika-product.jpg": {
+    "fallback": "./images/web/ichika-product.jpg",
+    "width": 1195,
+    "height": 1600,
+    "webp": [
+      {
+        "path": "./images/web/ichika-product-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/ichika-product-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/ichika-product-1195.webp",
+        "width": 1195
+      }
+    ]
+  },
+  "./images/web/ichika-packaging.jpg": {
+    "fallback": "./images/web/ichika-packaging.jpg",
+    "width": 1254,
+    "height": 1254,
+    "webp": [
+      {
+        "path": "./images/web/ichika-packaging-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/ichika-packaging-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/ichika-packaging-1254.webp",
+        "width": 1254
+      }
+    ]
+  },
+  "./images/web/ichika-tableware.jpg": {
+    "fallback": "./images/web/ichika-tableware.jpg",
+    "width": 1402,
+    "height": 1122,
+    "webp": [
+      {
+        "path": "./images/web/ichika-tableware-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/ichika-tableware-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/ichika-tableware-1402.webp",
+        "width": 1402
+      }
+    ]
+  },
+  "./images/web/ichika-menu.jpg": {
+    "fallback": "./images/web/ichika-menu.jpg",
+    "width": 1254,
+    "height": 1254,
+    "webp": [
+      {
+        "path": "./images/web/ichika-menu-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/ichika-menu-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/ichika-menu-1254.webp",
+        "width": 1254
+      }
+    ]
+  },
+  "./images/web/ichika-menu-scene.jpg": {
+    "fallback": "./images/web/ichika-menu-scene.jpg",
+    "width": 1402,
+    "height": 1122,
+    "webp": [
+      {
+        "path": "./images/web/ichika-menu-scene-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/ichika-menu-scene-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/ichika-menu-scene-1402.webp",
+        "width": 1402
+      }
+    ]
+  },
+  "./images/web/ichika-storefront.jpg": {
+    "fallback": "./images/web/ichika-storefront.jpg",
+    "width": 1402,
+    "height": 1122,
+    "webp": [
+      {
+        "path": "./images/web/ichika-storefront-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/ichika-storefront-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/ichika-storefront-1402.webp",
+        "width": 1402
+      }
+    ]
+  },
+  "./images/lab-type.png": {
+    "fallback": "./images/web/lab-type.jpg",
+    "width": 1600,
+    "height": 900,
+    "webp": [
+      {
+        "path": "./images/web/lab-type-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/lab-type-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/lab-type-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "./images/lab-texture.png": {
+    "fallback": "./images/web/lab-texture.jpg",
+    "width": 1254,
+    "height": 1254,
+    "webp": [
+      {
+        "path": "./images/web/lab-texture-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/lab-texture-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/lab-texture-1254.webp",
+        "width": 1254
+      }
+    ]
+  },
+  "./images/lab-form.png": {
+    "fallback": "./images/web/lab-form.jpg",
+    "width": 1600,
+    "height": 900,
+    "webp": [
+      {
+        "path": "./images/web/lab-form-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/lab-form-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/lab-form-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "./images/lab-material.png": {
+    "fallback": "./images/web/lab-material.jpg",
+    "width": 1600,
+    "height": 900,
+    "webp": [
+      {
+        "path": "./images/web/lab-material-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/lab-material-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/lab-material-1600.webp",
+        "width": 1600
+      }
+    ]
+  }
+}

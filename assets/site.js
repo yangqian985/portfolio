@@ -1,6 +1,5 @@
 // All content and navigation remain available without JavaScript.
-const navigation = document.querySelector('.sidenav');
-if (navigation) {
+document.querySelectorAll('.sidenav, .case-index').forEach(navigation => {
   const links = [...navigation.querySelectorAll('a[href^="#"]')];
   const sections = links.map(link => document.querySelector(link.hash)).filter(Boolean);
   const setCurrent = id => {
@@ -23,23 +22,45 @@ if (navigation) {
     }, { rootMargin: '-5% 0px -35% 0px', threshold: 0 });
     sections.forEach(section => observer.observe(section));
   }
-}
+});
 
 const lightbox = document.querySelector('#lab-lightbox');
 if (lightbox && typeof lightbox.showModal === 'function') {
   const image = lightbox.querySelector('img');
   const title = lightbox.querySelector('h2');
+  const previous = lightbox.querySelector('[data-image-prev]');
+  const next = lightbox.querySelector('[data-image-next]');
+  const counter = lightbox.querySelector('[data-image-counter]');
+  const buttons = [...document.querySelectorAll('[data-lightbox]')];
   let trigger;
-  document.querySelectorAll('[data-lightbox]').forEach(button => {
+  let active = 0;
+  const showImage = index => {
+    active = Math.max(0, Math.min(buttons.length - 1, index));
+    const button = buttons[active];
+    const thumbnail = button.querySelector('img');
+    image.src = button.dataset.fullImage || thumbnail.src;
+    image.alt = thumbnail.alt;
+    title.textContent = thumbnail.alt;
+    if (counter) counter.textContent = `${active + 1} / ${buttons.length}`;
+    if (previous) previous.disabled = active === 0;
+    if (next) next.disabled = active === buttons.length - 1;
+  };
+  buttons.forEach((button, index) => {
     button.addEventListener('click', () => {
       trigger = button;
-      const thumbnail = button.querySelector('img');
-      image.src = thumbnail.src;
-      image.alt = thumbnail.alt;
-      title.textContent = thumbnail.alt;
+      showImage(index);
       lightbox.showModal();
       document.body.classList.add('lightbox-open');
     });
+  });
+  previous?.addEventListener('click', () => showImage(active - 1));
+  next?.addEventListener('click', () => showImage(active + 1));
+  lightbox.addEventListener('keydown', event => {
+    if (event.altKey || event.ctrlKey || event.metaKey || event.isComposing) return;
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      event.preventDefault();
+      showImage(active + (event.key === 'ArrowRight' ? 1 : -1));
+    }
   });
   lightbox.querySelector('.lightbox-close').addEventListener('click', () => lightbox.close());
   lightbox.addEventListener('click', event => {

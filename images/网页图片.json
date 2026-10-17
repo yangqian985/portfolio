@@ -621,5 +621,43 @@
         "width": 1600
       }
     ]
+  },
+  "./images/small-projects/gentle-day-magazine-cover.jpg": {
+    "fallback": "./images/web/gentle-day-magazine-cover.jpg",
+    "width": 1600,
+    "height": 2172,
+    "webp": [
+      {
+        "path": "./images/web/gentle-day-magazine-cover-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/gentle-day-magazine-cover-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/gentle-day-magazine-cover-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "./images/small-projects/eden-fruit-poster.jpg": {
+    "fallback": "./images/web/eden-fruit-poster.jpg",
+    "width": 1600,
+    "height": 2263,
+    "webp": [
+      {
+        "path": "./images/web/eden-fruit-poster-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/eden-fruit-poster-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/eden-fruit-poster-1600.webp",
+        "width": 1600
+      }
+    ]
   }
 }

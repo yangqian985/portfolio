@@ -17,9 +17,10 @@ document.querySelectorAll('.sidenav, .case-index').forEach(navigation => {
         if (entry.isIntersecting) visible.add(entry.target);
         else visible.delete(entry.target);
       });
-      const first = sections.find(section => visible.has(section));
-      if (first) setCurrent(first.id);
-    }, { rootMargin: '-5% 0px -35% 0px', threshold: 0 });
+      // Prefer the new chapter in the reading band when two sections overlap it.
+      const current = [...sections].reverse().find(section => visible.has(section));
+      if (current) setCurrent(current.id);
+    }, { rootMargin: '-15% 0px -60% 0px', threshold: 0 });
     sections.forEach(section => observer.observe(section));
   }
 });

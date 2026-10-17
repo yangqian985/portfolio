@@ -25,6 +25,44 @@ document.querySelectorAll('.sidenav, .case-index').forEach(navigation => {
   }
 });
 
+document.querySelectorAll('[data-copy-text]').forEach(button => {
+    button.hidden = false;
+    button.addEventListener('click', async () => {
+      const status = document.querySelector('[data-copy-status]');
+      button.disabled = true;
+      button.setAttribute('aria-busy', 'true');
+      try {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(button.dataset.copyText);
+        } else if (!copySelectedEmail(button)) {
+          if (status) status.textContent = '邮箱已选中，可手动复制。';
+          return;
+        }
+        if (status) status.textContent = '邮箱已复制，可粘贴到邮件或聊天中。';
+      } catch {
+        const copied = copySelectedEmail(button);
+        if (status) status.textContent = copied ? '邮箱已复制，可粘贴到邮件或聊天中。' : '邮箱已选中，可手动复制。';
+      } finally {
+        button.disabled = false;
+        button.removeAttribute('aria-busy');
+      }
+    });
+});
+
+function copySelectedEmail(button) {
+  const link = button.parentElement.querySelector('a');
+  const selection = window.getSelection();
+  if (!link || !selection) return false;
+  const range = document.createRange();
+  range.selectNodeContents(link);
+  selection.removeAllRanges();
+  selection.addRange(range);
+  let copied = false;
+  try { copied = document.execCommand('copy'); } catch { /* Keep the email selected for manual copying. */ }
+  if (copied) selection.removeAllRanges();
+  return copied;
+}
+
 const lightbox = document.querySelector('#lab-lightbox');
 if (lightbox && typeof lightbox.showModal === 'function') {
   const image = lightbox.querySelector('img');

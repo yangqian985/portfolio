@@ -196,6 +196,31 @@ section[id], footer[id] { scroll-margin-top: var(--space-lg); }
 .pdf-panel .pdf-note { margin-top: .5rem; font-size: .75rem; }
 .button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: .75rem var(--space-md); background: var(--accent); color: var(--surface); font-size: .875rem; white-space: nowrap; }
 .button:hover { background: var(--ink); }
+.button:active { background: var(--ink); }
+.button-compact { min-height: 44px; padding: .5rem .65rem; font-size: .8125rem; }
+.button-secondary { background: var(--surface); color: var(--ink); border: 1px solid var(--line); }
+.button-secondary:hover, .button-secondary:active { background: var(--accent-soft); color: var(--accent); }
+.side-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: center; gap: var(--space-xs); margin-top: var(--space-md); max-width: 260px; }
+.side-actions .button-compact { padding: .5rem .4rem; font-size: .75rem; }
+.side-actions .text-link { display: flex; justify-content: center; padding: .5rem .4rem; font-size: .75rem; }
+.contact-layout { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: var(--space-xl); align-items: start; }
+.contact-description { margin: 0; max-width: 52ch; color: var(--muted); font-size: .9375rem; }
+.contact-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs) var(--space-sm); margin-top: var(--space-md); }
+.resume-note { margin: var(--space-sm) 0 0; color: var(--muted); font-size: .75rem; }
+.contact-info { display: grid; gap: var(--space-md); padding-top: var(--space-sm); }
+.contact-info > div { min-width: 0; padding-bottom: var(--space-sm); border-bottom: 1px solid var(--line); }
+.contact-info dt { margin-bottom: var(--space-xs); color: var(--muted); font-size: .75rem; }
+.contact-info dd { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-xs) var(--space-sm); }
+.contact-info a { white-space: nowrap; }
+.copy-button { min-height: 44px; padding: .5rem var(--space-xs); border: 1px solid var(--line); background: var(--surface); color: var(--accent); font-size: .75rem; white-space: nowrap; }
+.copy-button:hover, .copy-button:active { background: var(--accent-soft); }
+.copy-button:disabled { opacity: .6; cursor: default; }
+.copy-button[hidden] { display: none; }
+.contact-copy-status { min-height: 1.75em; margin: var(--space-xs) 0 0; color: var(--muted); font-size: .75rem; }
+.case-contact { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); align-items: center; gap: var(--space-lg); padding-block: var(--space-xl); border-top: 1px solid var(--line); }
+.case-contact h2 { margin: var(--space-xs) 0; font-size: clamp(1.5rem, 2.5vw, 2rem); line-height: 1.4; font-weight: 400; overflow-wrap: anywhere; }
+.case-contact p { margin: 0; color: var(--muted); font-size: .875rem; }
+.case-contact .contact-actions { justify-content: end; margin-top: 0; }
 .case-pagination { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--space-sm) var(--space-md); padding-block: var(--space-lg); border-top: 1px solid var(--line); font-size: .875rem; }
 .case-pagination a { padding-block: .5rem; }
 .case-page > .site-footer { padding-bottom: var(--space-lg); }
@@ -223,6 +248,7 @@ section[id], footer[id] { scroll-margin-top: var(--space-lg); }
   .project-visual { aspect-ratio: 4 / 3; }
   .section-head { display: block; }
   .section-head > p { margin-top: .75rem; max-width: none; }
+  .contact-layout { grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); }
   .visual-subsection-head { display: block; }
   .visual-subsection-head p { margin-top: .5rem; max-width: none; }
   .small-project-empty { grid-template-columns: minmax(0, 1fr); gap: .4rem; }
@@ -254,6 +280,8 @@ section[id], footer[id] { scroll-margin-top: var(--space-lg); }
   .case-page { width: calc(100% - 40px); }
   .case-nav { min-height: 72px; }
   .case-nav nav { gap: var(--space-sm); }
+  .contact-layout, .case-contact { grid-template-columns: minmax(0, 1fr); gap: var(--space-lg); }
+  .case-contact .contact-actions { justify-content: start; }
   .case-hero { grid-template-columns: minmax(0, 1fr); padding-block: var(--space-lg); }
   .case-hero h1 { font-size: clamp(2.5rem, 9vw, 3.5rem); }
   .case-meta { grid-template-columns: minmax(0,.45fr) minmax(0,1.55fr); gap: var(--space-sm); }

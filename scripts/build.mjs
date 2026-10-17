@@ -3,6 +3,7 @@
 import { readFile, writeFile, mkdir, cp, stat, rm, readdir } from 'node:fs/promises';
 import { resolve, dirname, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const out = resolve(root, 'dist');
@@ -91,11 +92,25 @@ const site = new URL(data.网站地址 || 'https://mywk.asia/');
 if (site.protocol !== 'https:' || site.username || site.password || site.search || site.hash || site.pathname !== '/') throw Error('网站地址必须为 HTTPS 根网址');
 const absolute = path => new URL(path, site).href;
 text(data.联系?.标题, '联系.标题');
-if (!/^\+?[\d ()-]{5,25}$/.test(data.联系?.电话)) throw Error('联系.电话 格式不正确');
+text(data.联系?.说明, '联系.说明');
+for (const phone of list(data.联系?.电话, '联系.电话')) {
+  if (typeof phone !== 'string' || !/^\+?[\d ()-]{5,25}$/.test(phone)) throw Error('联系.电话 格式不正确');
+}
 for (const email of list(data.联系?.邮箱, '联系.邮箱')) {
   if (typeof email !== 'string' || !/^[^\s@<>"'?#]+@[^\s@<>"'?#]+\.[^\s@<>"'?#]+$/.test(email)) throw Error('邮箱格式不正确');
 }
 const projects = list(data.项目, '项目');
+if (!text(data.联系.简历, '联系.简历').toLowerCase().endsWith('.pdf')) throw Error('简历路径必须以 .pdf 结尾');
+const resumePath = await asset(data.联系.简历);
+if ((await readFile(resumePath)).subarray(0,5).toString() !== '%PDF-') throw Error('简历不是有效的 PDF');
+const contactContext = {
+  邮件目标: `mailto:${data.联系.邮箱[0]}?subject=${encodeURIComponent('设计实习与项目交流 - ' + profile.姓名)}`,
+  简历大小: String(Math.ceil((await stat(resumePath)).size / 1024)),
+};
+const assetContext = {
+  样式版本: createHash('sha256').update(await readFile(resolve(root,'assets/site.css'))).digest('hex').slice(0,12),
+  脚本版本: createHash('sha256').update(await readFile(resolve(root,'assets/site.js'))).digest('hex').slice(0,12),
+};
 if (!Array.isArray(data.独立作品)) throw Error('独立作品必须是数组');
 text(data.独立作品说明, '独立作品说明');
 for (const item of data.独立作品) {
@@ -133,11 +148,11 @@ const homeSections = {
   流程卡片: list(data.设计流程, '设计流程').map((p,i) => `<article class="step"><span class="step-number">STEP ${String(i+1).padStart(2,'0')}</span><h3>${esc(text(p.英文标题, '流程英文标题'))}</h3><h4>${esc(text(p.中文标题, '流程中文标题'))}</h4><p>${esc(text(p.说明, '流程说明'))}</p></article>`).join('\n'),
   核心能力: list(profile.核心能力, '核心能力').map(p => `<li>${esc(text(p,'核心能力'))}</li>`).join(''),
   软件工具: list(profile.软件工具, '软件工具').map(p => `<li>${esc(text(p,'软件工具'))}</li>`).join(''),
-  联系方式: `<a href="tel:${esc(data.联系.电话)}">电话：${esc(data.联系.电话)}</a>` + data.联系.邮箱.map(p => `<a href="mailto:${esc(p)}">${esc(p)}</a>`).join(''),
+  联系方式: `<div><dt>联系电话</dt><dd>${data.联系.电话.map(phone => `<a href="tel:${esc(phone.replace(/[ ()-]/g,''))}">${esc(phone)}</a>`).join('')}</dd></div>` + data.联系.邮箱.map((email,i) => `<div><dt>${i === 0 ? '首选邮箱' : '备用邮箱'}</dt><dd><a href="mailto:${esc(email)}">${esc(email)}</a>${i === 0 ? `<button class="copy-button" type="button" data-copy-text="${esc(email)}" aria-label="复制首选邮箱" hidden>复制邮箱</button>` : ''}</dd></div>`).join(''),
 };
 const homeTemplate = await readFile(resolve(root, 'templates/index.html'), 'utf8');
 const caseTemplate = await readFile(resolve(root, 'templates/project.html'), 'utf8');
-const html = new Map([['index.html', render(homeTemplate, {...data, 项目数量:String(projects.length).padStart(2,'0'),规范网址:site.href,分享图片:absolute(fullImage(projects[0].封面))}, homeSections)]]);
+const html = new Map([['index.html', render(homeTemplate, {...data, ...contactContext, ...assetContext, 项目数量:String(projects.length).padStart(2,'0'),规范网址:site.href,分享图片:absolute(fullImage(projects[0].封面))}, homeSections)]]);
 for (let i=0; i<projects.length; i++) {
   const p = projects[i];
   const next = projects[(i+1)%projects.length];
@@ -151,7 +166,7 @@ for (let i=0; i<projects.length; i++) {
     }
     gallery.push(`<section id="${esc(chapter.锚点)}" class="case-section case-chapter" aria-labelledby="${esc(chapter.锚点)}-heading"><div class="chapter-heading"><div><span class="eyebrow">${String(index+1).padStart(2,'0')} / ${esc(chapter.导航名)}</span><h2 id="${esc(chapter.锚点)}-heading">${esc(chapter.标题)}</h2></div><p>${esc(chapter.导语)}</p></div><div class="case-gallery">${figures.join('\n')}</div></section>`);
   }
-  html.set(p.页面, render(caseTemplate, {...data, 当前项目:p, 项目摘要:p.概述[0], 浏览目标:'#'+(chapters[0]?.锚点 || 'overview'),规范网址:absolute(p.页面),分享图片:absolute(fullImage(p.封面)),PDF大小:((await stat(local(p.PDF))).size / 1024 / 1024).toFixed(1)}, {
+  html.set(p.页面, render(caseTemplate, {...data, ...contactContext, ...assetContext, 当前项目:p, 项目摘要:p.概述[0], 浏览目标:'#'+(chapters[0]?.锚点 || 'overview'),规范网址:absolute(p.页面),分享图片:absolute(fullImage(p.封面)),PDF大小:((await stat(local(p.PDF))).size / 1024 / 1024).toFixed(1)}, {
     项目封面: await image(p.封面, p.封面说明, true,'(max-width: 760px) calc(100vw - 32px), (max-width: 1304px) 55vw, 700px'),
     案例导航: navigation,
     案例展示: gallery.join('\n'),

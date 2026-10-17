@@ -6,6 +6,14 @@
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="{{个人资料.简介}}" name="description"/>
 <meta content="#f9f9fb" name="theme-color"/>
+<link rel="canonical" href="{{规范网址}}"/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="{{个人资料.姓名}} | {{个人资料.首页标题}}"/>
+<meta property="og:description" content="{{个人资料.简介}}"/>
+<meta property="og:url" content="{{规范网址}}"/>
+<meta property="og:image" content="{{分享图片}}"/>
+<meta property="og:locale" content="zh_CN"/>
+<meta name="twitter:card" content="summary_large_image"/>
 <title>{{个人资料.姓名}} ({{个人资料.英文名}}) | 视觉传达与品牌设计作品集</title>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -160,6 +168,7 @@
     </button>
 </div>
 <img alt="" class="lightbox-image"/>
+<div class="lightbox-tools"><button type="button" data-image-prev>← 上一张</button><span data-image-counter aria-live="polite"></span><button type="button" data-image-next>下一张 →</button></div>
 </dialog>
 </body>
 </html>

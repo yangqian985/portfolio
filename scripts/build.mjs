@@ -1,12 +1,16 @@
 // 网站内容.json is the only source for editable portfolio content.
 // Node core modules only: no package installation or browser JavaScript needed.
-import { readFile, writeFile, mkdir, cp, stat, rm } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, cp, stat, rm, readdir } from 'node:fs/promises';
 import { resolve, dirname, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const out = resolve(root, 'dist');
 const data = JSON.parse(await readFile(resolve(root, '网站内容.json'), 'utf8'));
+const media = JSON.parse(await readFile(resolve(root, 'images/网页图片.json'), 'utf8').catch(error => {
+  if (error.code === 'ENOENT') return '{}';
+  throw error;
+}));
 const esc = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const text = (value, label) => {
   if (typeof value !== 'string' || !value.trim()) throw Error(`${label} 必须填写文字`);
@@ -31,8 +35,12 @@ async function asset(value) {
   assets.add(path);
   return path;
 }
-async function image(src, alt, priority = false) {
-  const path = await asset(src);
+const fullImage = src => media[src]?.fallback || src;
+async function image(src, alt, priority = false, sizes = '(max-width: 760px) calc(100vw - 32px), (max-width: 960px) calc(100vw - 248px), (max-width: 1600px) calc((100vw - 374px) / 2), 550px') {
+  // Sources remain in the repository; only the selected web derivatives deploy.
+  if (media[src]) await stat(local(src));
+  const fallback = fullImage(src);
+  const path = await asset(fallback);
   const buf = await readFile(path);
   let width, height;
   if (buf.subarray(0, 8).equals(Buffer.from([137,80,78,71,13,10,26,10]))) {
@@ -54,7 +62,15 @@ async function image(src, alt, priority = false) {
     }
   }
   if (!width || !height) throw Error(`图片请使用有效的 JPG 或 PNG：${src}`);
-  return `<img src="${esc(src)}" alt="${esc(text(alt, '图片说明'))}" width="${width}" height="${height}" decoding="async" ${priority ? 'fetchpriority="high"' : 'loading="lazy"'}>`;
+  const img = `<img src="${esc(fallback)}" alt="${esc(text(alt, '图片说明'))}" width="${width}" height="${height}" decoding="async" ${priority ? 'fetchpriority="high"' : 'loading="lazy"'}>`;
+  if (!media[src]) return img;
+  const variants = [];
+  for (const variant of list(media[src].webp, `图片 ${src} 的 WebP 版本`)) {
+    if (!Number.isInteger(variant.width) || variant.width < 1 || !variant.path.endsWith('.webp')) throw Error(`网页图片配置无效：${src}`);
+    await asset(variant.path);
+    variants.push(`${esc(variant.path)} ${variant.width}w`);
+  }
+  return `<picture><source type="image/webp" srcset="${variants.join(', ')}" sizes="${esc(sizes)}">${img}</picture>`;
 }
 function render(template, context, sections) {
   return template.replace(/\{\{\{([^{}]+)\}\}\}|\{\{([^{}]+)\}\}/g, (_, raw, key) => {
@@ -71,6 +87,9 @@ function render(template, context, sections) {
 const profile = data.个人资料;
 for (const key of ['姓名','英文名','品牌署名','职业','首页标题','简介','项目区说明','侧栏专业','关于我','专业','在校时间','课程','求职意向']) text(profile?.[key], `个人资料.${key}`);
 text(data.年份, '年份');
+const site = new URL(data.网站地址 || 'https://mywk.asia/');
+if (site.protocol !== 'https:' || site.username || site.password || site.search || site.hash || site.pathname !== '/') throw Error('网站地址必须为 HTTPS 根网址');
+const absolute = path => new URL(path, site).href;
 text(data.联系?.标题, '联系.标题');
 if (!/^\+?[\d ()-]{5,25}$/.test(data.联系?.电话)) throw Error('联系.电话 格式不正确');
 for (const email of list(data.联系?.邮箱, '联系.邮箱')) {
@@ -87,10 +106,21 @@ for (const project of projects) {
   if (!project.PDF.toLowerCase().endsWith('.pdf')) throw Error('项目 PDF 路径必须以 .pdf 结尾');
   const pdf = await asset(project.PDF);
   if ((await readFile(pdf)).subarray(0,5).toString() !== '%PDF-') throw Error(`不是有效的 PDF：${project.PDF}`);
+  const anchors = new Set(['top','main','overview','scope','pdf','lab-lightbox']);
+  for (const chapter of project.展示章节 || []) {
+    if (!/^[a-z][a-z0-9-]*$/.test(chapter.锚点) || anchors.has(chapter.锚点)) throw Error(`章节锚点重复或无效：${chapter.锚点}`);
+    anchors.add(chapter.锚点);
+    for (const key of ['导航名','标题','导语']) text(chapter[key], `展示章节.${key}`);
+    if (chapter.导航名.length > 6) throw Error('章节导航名请控制在 6 个字以内');
+    for (const item of list(chapter.图片, '章节图片')) {
+      for (const key of ['图片','名称','说明']) text(item[key], `章节图片.${key}`);
+      if (item.宽幅 !== undefined && typeof item.宽幅 !== 'boolean') throw Error('宽幅必须填 true 或 false');
+    }
+  }
 }
 const homeSections = {
-  项目卡片: (await Promise.all(projects.map(async (p, i) => `<a class="project" href="./${esc(p.页面)}"><div class="project-visual">${await image(p.封面, p.封面说明, i === 0)}</div><div class="project-data"><div><h3>${esc(p.首页名称)}</h3><p>${esc(p.首页说明)}</p></div><span class="project-type">${esc(p.年份)} · ${esc(p.分类短名)}</span></div></a>`))).join('\n'),
-  实验卡片: (await Promise.all(list(data.视觉实验, '视觉实验').map(async p => `<button class="lab-tile" type="button" data-lightbox aria-controls="lab-lightbox" aria-haspopup="dialog" aria-label="放大查看：${esc(text(p.名称, '实验名称'))}"><figure>${await image(p.图片,p.名称)}<figcaption><span>${esc(p.名称)}</span><span aria-hidden="true">↗</span></figcaption></figure></button>`))).join('\n'),
+  项目卡片: (await Promise.all(projects.map(async (p, i) => `<a class="project" href="./${esc(p.页面)}"><div class="project-visual">${await image(p.封面, p.封面说明, i === 0)}<span class="project-open" aria-hidden="true">查看案例 ↗</span></div><div class="project-data"><div class="project-label"><span>${String(i+1).padStart(2,'0')}</span><span>${esc(p.年份)} · ${esc(p.分类短名)}</span></div><div><h3>${esc(p.首页名称)}</h3><p>${esc(p.首页说明)}</p></div><span class="project-action" aria-hidden="true">品牌案例详情 <span>↗</span></span></div></a>`))).join('\n'),
+  实验卡片: (await Promise.all(list(data.视觉实验, '视觉实验').map(async p => `<button class="lab-tile" type="button" data-lightbox data-full-image="${esc(fullImage(p.图片))}" aria-controls="lab-lightbox" aria-haspopup="dialog" aria-label="放大查看：${esc(text(p.名称, '实验名称'))}"><figure>${await image(p.图片,p.名称,false,'(max-width: 1200px) 45vw, 260px')}<figcaption><span>${esc(p.名称)}</span><span aria-hidden="true">↗</span></figcaption></figure></button>`))).join('\n'),
   实验说明: data.视觉实验.map(p => esc(p.名称)).join(' · '),
   流程卡片: list(data.设计流程, '设计流程').map((p,i) => `<article class="step"><span class="step-number">STEP ${String(i+1).padStart(2,'0')}</span><h3>${esc(text(p.英文标题, '流程英文标题'))}</h3><h4>${esc(text(p.中文标题, '流程中文标题'))}</h4><p>${esc(text(p.说明, '流程说明'))}</p></article>`).join('\n'),
   核心能力: list(profile.核心能力, '核心能力').map(p => `<li>${esc(text(p,'核心能力'))}</li>`).join(''),
@@ -99,12 +129,24 @@ const homeSections = {
 };
 const homeTemplate = await readFile(resolve(root, 'templates/index.html'), 'utf8');
 const caseTemplate = await readFile(resolve(root, 'templates/project.html'), 'utf8');
-const html = new Map([['index.html', render(homeTemplate, {...data, 项目数量:String(projects.length).padStart(2,'0')}, homeSections)]]);
+const html = new Map([['index.html', render(homeTemplate, {...data, 项目数量:String(projects.length).padStart(2,'0'),规范网址:site.href,分享图片:absolute(fullImage(projects[0].封面))}, homeSections)]]);
 for (let i=0; i<projects.length; i++) {
   const p = projects[i];
   const next = projects[(i+1)%projects.length];
-  html.set(p.页面, render(caseTemplate, {...data, 当前项目:p, 项目摘要:p.概述[0], PDF大小:((await stat(local(p.PDF))).size / 1024 / 1024).toFixed(1)}, {
-    项目封面: await image(p.封面, p.名称, true),
+  const chapters = p.展示章节 || [];
+  const navigation = '<a href="#overview">项目概述</a>' + chapters.map(ch => `<a href="#${esc(ch.锚点)}">${esc(ch.导航名)}</a>`).join('') + '<a href="#pdf">完整 PDF</a>';
+  const gallery = [];
+  for (const [index, chapter] of chapters.entries()) {
+    const figures = [];
+    for (const item of chapter.图片) {
+      figures.push(`<figure class="case-figure${item.宽幅 ? ' case-figure-wide' : ''}"><button class="case-zoom" type="button" data-lightbox data-full-image="${esc(fullImage(item.图片))}" aria-controls="lab-lightbox" aria-haspopup="dialog" aria-label="放大查看：${esc(item.名称)}">${await image(item.图片,item.名称,false,item.宽幅 ? '(max-width: 760px) calc(100vw - 32px), (max-width: 1304px) calc(100vw - 64px), 1240px' : '(max-width: 760px) calc(100vw - 32px), (max-width: 1304px) calc((100vw - 96px) / 2), 604px')}<span class="zoom-hint" aria-hidden="true">放大 ↗</span></button><figcaption><h3>${esc(item.名称)}</h3><p>${esc(item.说明)}</p></figcaption></figure>`);
+    }
+    gallery.push(`<section id="${esc(chapter.锚点)}" class="case-section case-chapter" aria-labelledby="${esc(chapter.锚点)}-heading"><div class="chapter-heading"><div><span class="eyebrow">${String(index+1).padStart(2,'0')} / ${esc(chapter.导航名)}</span><h2 id="${esc(chapter.锚点)}-heading">${esc(chapter.标题)}</h2></div><p>${esc(chapter.导语)}</p></div><div class="case-gallery">${figures.join('\n')}</div></section>`);
+  }
+  html.set(p.页面, render(caseTemplate, {...data, 当前项目:p, 项目摘要:p.概述[0], 浏览目标:'#'+(chapters[0]?.锚点 || 'overview'),规范网址:absolute(p.页面),分享图片:absolute(fullImage(p.封面)),PDF大小:((await stat(local(p.PDF))).size / 1024 / 1024).toFixed(1)}, {
+    项目封面: await image(p.封面, p.封面说明, true,'(max-width: 760px) calc(100vw - 32px), (max-width: 1304px) 55vw, 700px'),
+    案例导航: navigation,
+    案例展示: gallery.join('\n'),
     项目概述: p.概述.map(s => `<p>${esc(s)}</p>`).join('\n'),
     交付清单: p.交付内容.map((s,i) => `<li><span class="eyebrow">${String(i+1).padStart(2,'0')}</span><h3>${esc(s.名称)}</h3><p>${esc(s.说明)}</p></li>`).join('\n'),
     项目切换: '<a href="./index.html#works">← 全部项目</a>' + (projects.length>1 ? `<a href="./${esc(next.页面)}">${esc(next.名称)} →</a>` : ''),
@@ -112,8 +154,13 @@ for (let i=0; i<projects.length; i++) {
 }
 // Clean only the fixed generated output directory after all content has validated.
 if (out !== resolve(root, 'dist') || relative(root,out) !== 'dist') throw Error('输出目录不安全');
-await rm(out, {recursive:true, force:true});
 await mkdir(out, {recursive:true});
+// Keep dist itself so a running Windows preview server can keep its cwd.
+for (const name of await readdir(out)) {
+  const path = resolve(out, name);
+  if (dirname(path) !== out) throw Error('生成文件超出输出目录');
+  await rm(path, {recursive:true, force:true});
+}
 await cp(resolve(root,'assets'), resolve(out,'assets'), {recursive:true});
 for (const path of assets) {
   const target = resolve(out,relative(root,path));
@@ -125,4 +172,6 @@ for (const [name, content] of html) {
   // Root snapshots remain convenient for an ordinary static preview.
   await writeFile(resolve(root,name),content+'\n');
 }
+await writeFile(resolve(out,'robots.txt'),`User-agent: *\nAllow: /\nSitemap: ${absolute('sitemap.xml')}\n`);
+await writeFile(resolve(out,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${[site.href,...projects.map(p=>absolute(p.页面))].map(url=>`<url><loc>${esc(url)}</loc></url>`).join('')}</urlset>\n`);
 console.log(`已生成首页和 ${projects.length} 个项目，输出目录 dist/`);

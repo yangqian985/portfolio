@@ -114,7 +114,8 @@ const assetContext = {
 if (!Array.isArray(data.独立作品)) throw Error('独立作品必须是数组');
 text(data.独立作品说明, '独立作品说明');
 for (const item of data.独立作品) {
-  for (const key of ['名称','类别','年份','说明','图片','图片说明']) text(item[key], `独立作品.${key}`);
+  for (const key of ['名称','类别','说明','图片','图片说明']) text(item[key], `独立作品.${key}`);
+  if (item.年份 !== undefined && typeof item.年份 !== 'string') throw Error('独立作品.年份 必须为文字或留空');
 }
 const pages = new Set();
 for (const project of projects) {
@@ -142,7 +143,7 @@ for (const project of projects) {
 }
 const homeSections = {
   项目卡片: (await Promise.all(projects.map(async (p, i) => `<a class="project" href="./${esc(p.页面)}"><div class="project-visual">${await image(p.封面, p.封面说明, i === 0)}<span class="project-open" aria-hidden="true">查看案例 ↗</span></div><div class="project-data"><div class="project-label"><span>${String(i+1).padStart(2,'0')}</span><span>${esc(p.年份)} · ${esc(p.分类短名)}</span></div><div><h3>${esc(p.首页名称)}</h3><p>${esc(p.首页说明)}</p></div><span class="project-action" aria-hidden="true">品牌案例详情 <span>↗</span></span></div></a>`))).join('\n'),
-  独立作品卡片: data.独立作品.length ? (await Promise.all(data.独立作品.map(async item => `<button class="small-project-card" type="button" data-lightbox data-full-image="${esc(fullImage(item.图片))}" aria-controls="lab-lightbox" aria-haspopup="dialog" aria-label="放大查看：${esc(item.名称)}"><span class="small-project-visual">${await image(item.图片,item.图片说明,false,'(max-width: 480px) calc(100vw - 64px), (max-width: 1200px) 40vw, 300px')}</span><span class="small-project-data"><span class="small-project-meta"><span>${esc(item.类别)}</span><span>${esc(item.年份)}</span></span><span class="small-project-title">${esc(item.名称)}</span><span class="small-project-description">${esc(item.说明)}</span></span></button>`))).join('\n') : '<div class="small-project-empty"><span class="eyebrow">OPEN INDEX</span><p>独立作品会按主题陆续收录于此。</p><span>海报 · 图形 · 标志 · 包装 · 版式</span></div>',
+  独立作品卡片: data.独立作品.length ? (await Promise.all(data.独立作品.map(async item => `<button class="small-project-card" type="button" data-lightbox data-full-image="${esc(fullImage(item.图片))}" aria-controls="lab-lightbox" aria-haspopup="dialog" aria-label="放大查看：${esc(item.名称)}"><span class="small-project-visual">${await image(item.图片,item.图片说明,false,'(max-width: 480px) calc(100vw - 64px), (max-width: 1200px) 40vw, 300px')}</span><span class="small-project-data"><span class="small-project-meta"><span>${esc(item.类别)}</span>${item.年份?.trim() ? `<span>${esc(item.年份.trim())}</span>` : ''}</span><span class="small-project-title">${esc(item.名称)}</span><span class="small-project-description">${esc(item.说明)}</span></span></button>`))).join('\n') : '<div class="small-project-empty"><span class="eyebrow">OPEN INDEX</span><p>独立作品会按主题陆续收录于此。</p><span>海报 · 图形 · 标志 · 包装 · 版式</span></div>',
   实验卡片: (await Promise.all(list(data.视觉实验, '视觉实验').map(async p => `<button class="lab-tile" type="button" data-lightbox data-full-image="${esc(fullImage(p.图片))}" aria-controls="lab-lightbox" aria-haspopup="dialog" aria-label="放大查看：${esc(text(p.名称, '实验名称'))}"><figure>${await image(p.图片,p.名称,false,'(max-width: 1200px) 45vw, 260px')}<figcaption><span>${esc(p.名称)}</span><span aria-hidden="true">↗</span></figcaption></figure></button>`))).join('\n'),
   实验说明: data.视觉实验.map(p => esc(p.名称)).join(' · '),
   流程卡片: list(data.设计流程, '设计流程').map((p,i) => `<article class="step"><span class="step-number">STEP ${String(i+1).padStart(2,'0')}</span><h3>${esc(text(p.英文标题, '流程英文标题'))}</h3><h4>${esc(text(p.中文标题, '流程中文标题'))}</h4><p>${esc(text(p.说明, '流程说明'))}</p></article>`).join('\n'),

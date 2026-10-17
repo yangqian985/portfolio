@@ -96,6 +96,11 @@ for (const email of list(data.联系?.邮箱, '联系.邮箱')) {
   if (typeof email !== 'string' || !/^[^\s@<>"'?#]+@[^\s@<>"'?#]+\.[^\s@<>"'?#]+$/.test(email)) throw Error('邮箱格式不正确');
 }
 const projects = list(data.项目, '项目');
+if (!Array.isArray(data.零散项目)) throw Error('零散项目必须是数组');
+text(data.零散项目说明, '零散项目说明');
+for (const item of data.零散项目) {
+  for (const key of ['名称','类别','年份','说明','图片','图片说明']) text(item[key], `零散项目.${key}`);
+}
 const pages = new Set();
 for (const project of projects) {
   for (const key of ['页面','名称','英文副标题','首页名称','首页说明','年份','分类短名','项目标签','类别','服务范围','封面','封面说明','PDF','PDF说明']) text(project[key], `项目.${key}`);
@@ -120,6 +125,7 @@ for (const project of projects) {
 }
 const homeSections = {
   项目卡片: (await Promise.all(projects.map(async (p, i) => `<a class="project" href="./${esc(p.页面)}"><div class="project-visual">${await image(p.封面, p.封面说明, i === 0)}<span class="project-open" aria-hidden="true">查看案例 ↗</span></div><div class="project-data"><div class="project-label"><span>${String(i+1).padStart(2,'0')}</span><span>${esc(p.年份)} · ${esc(p.分类短名)}</span></div><div><h3>${esc(p.首页名称)}</h3><p>${esc(p.首页说明)}</p></div><span class="project-action" aria-hidden="true">品牌案例详情 <span>↗</span></span></div></a>`))).join('\n'),
+  零散项目卡片: data.零散项目.length ? (await Promise.all(data.零散项目.map(async item => `<button class="small-project-card" type="button" data-lightbox data-full-image="${esc(fullImage(item.图片))}" aria-controls="lab-lightbox" aria-haspopup="dialog" aria-label="放大查看：${esc(item.名称)}"><span class="small-project-visual">${await image(item.图片,item.图片说明,false,'(max-width: 480px) calc(100vw - 64px), (max-width: 1200px) 40vw, 300px')}</span><span class="small-project-data"><span class="small-project-meta"><span>${esc(item.类别)}</span><span>${esc(item.年份)}</span></span><span class="small-project-title">${esc(item.名称)}</span><span class="small-project-description">${esc(item.说明)}</span></span></button>`))).join('\n') : '<div class="small-project-empty"><span class="eyebrow">OPEN INDEX</span><p>独立作品会按主题陆续收录于此。</p><span>海报 · 图形 · 标志 · 包装 · 版式</span></div>',
   实验卡片: (await Promise.all(list(data.视觉实验, '视觉实验').map(async p => `<button class="lab-tile" type="button" data-lightbox data-full-image="${esc(fullImage(p.图片))}" aria-controls="lab-lightbox" aria-haspopup="dialog" aria-label="放大查看：${esc(text(p.名称, '实验名称'))}"><figure>${await image(p.图片,p.名称,false,'(max-width: 1200px) 45vw, 260px')}<figcaption><span>${esc(p.名称)}</span><span aria-hidden="true">↗</span></figcaption></figure></button>`))).join('\n'),
   实验说明: data.视觉实验.map(p => esc(p.名称)).join(' · '),
   流程卡片: list(data.设计流程, '设计流程').map((p,i) => `<article class="step"><span class="step-number">STEP ${String(i+1).padStart(2,'0')}</span><h3>${esc(text(p.英文标题, '流程英文标题'))}</h3><h4>${esc(text(p.中文标题, '流程中文标题'))}</h4><p>${esc(text(p.说明, '流程说明'))}</p></article>`).join('\n'),

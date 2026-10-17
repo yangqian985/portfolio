@@ -18,8 +18,8 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Noto+Sans+SC:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
-<link href="./assets/site.css" rel="stylesheet"/>
-<script defer="" src="./assets/site.js">
+<link href="./assets/site.css?v={{样式版本}}" rel="stylesheet"/>
+<script defer="" src="./assets/site.js?v={{脚本版本}}">
 </script>
 </head>
 <body id="top">
@@ -34,6 +34,10 @@
 <div class="eyebrow">{{个人资料.职业}}</div>
 <h1>{{个人资料.首页标题}}</h1>
 <p>{{个人资料.简介}}</p>
+<div class="side-actions" aria-label="快捷联系">
+<a class="button button-compact" href="{{邮件目标}}">邮件联系 ↗</a>
+<a class="text-link" href="{{联系.简历}}" target="_blank" rel="noopener">查看简历 ↗</a>
+</div>
 </div>
 <nav aria-label="主导航" class="sidenav">
 <a aria-current="location" href="#works">
@@ -49,7 +53,7 @@
       关于我
      </a>
 <a href="#contact">
-      联系
+      联系 / 简历
      </a>
 </nav>
 <div class="side-foot">{{个人资料.侧栏专业}}<br/>{{个人资料.在校时间}}</div>
@@ -153,8 +157,22 @@
 <div class="eyebrow">
       Get in touch
      </div>
+<div class="contact-layout">
+<div>
 <h2 id="contact-heading">{{联系.标题}}</h2>
-<div class="contact-info">{{{联系方式}}}</div>
+<p class="contact-description">{{联系.说明}}</p>
+<div class="contact-actions">
+<a class="button" href="{{邮件目标}}">邮件联系 ↗</a>
+<a class="button button-secondary" href="{{联系.简历}}" target="_blank" rel="noopener">查看简历 ↗</a>
+<a class="text-link" href="{{联系.简历}}" download="{{个人资料.姓名}}_设计实习简历.pdf">下载 PDF ↓</a>
+</div>
+<p class="resume-note">A4 · PDF · {{简历大小}} KB</p>
+</div>
+<div>
+<dl class="contact-info">{{{联系方式}}}</dl>
+<p class="contact-copy-status" data-copy-status role="status" aria-live="polite"></p>
+</div>
+</div>
 </section>
 <footer class="site-footer">
 <p>© {{年份}} {{个人资料.英文名}}. All rights reserved.</p>

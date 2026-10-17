@@ -378,5 +378,248 @@
         "width": 1600
       }
     ]
+  },
+  "./images/web/shiyueji-cover.jpg": {
+    "fallback": "./images/web/shiyueji-cover.jpg",
+    "width": 1030,
+    "height": 652,
+    "webp": [
+      {
+        "path": "./images/web/shiyueji-cover-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/shiyueji-cover-960.webp",
+        "width": 960
+      }
+    ]
+  },
+  "./images/web/shiyueji-logo-system.jpg": {
+    "fallback": "./images/web/shiyueji-logo-system.jpg",
+    "width": 1600,
+    "height": 900,
+    "webp": [
+      {
+        "path": "./images/web/shiyueji-logo-system-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/shiyueji-logo-system-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/shiyueji-logo-system-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "./images/web/shiyueji-color-system.jpg": {
+    "fallback": "./images/web/shiyueji-color-system.jpg",
+    "width": 1600,
+    "height": 900,
+    "webp": [
+      {
+        "path": "./images/web/shiyueji-color-system-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/shiyueji-color-system-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/shiyueji-color-system-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "./images/web/shiyueji-graphic-language.jpg": {
+    "fallback": "./images/web/shiyueji-graphic-language.jpg",
+    "width": 1600,
+    "height": 900,
+    "webp": [
+      {
+        "path": "./images/web/shiyueji-graphic-language-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/shiyueji-graphic-language-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/shiyueji-graphic-language-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "./images/web/shiyueji-logo-specification.jpg": {
+    "fallback": "./images/web/shiyueji-logo-specification.jpg",
+    "width": 1600,
+    "height": 900,
+    "webp": [
+      {
+        "path": "./images/web/shiyueji-logo-specification-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/shiyueji-logo-specification-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/shiyueji-logo-specification-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "./images/web/shiyueji-mascot.jpg": {
+    "fallback": "./images/web/shiyueji-mascot.jpg",
+    "width": 1600,
+    "height": 900,
+    "webp": [
+      {
+        "path": "./images/web/shiyueji-mascot-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/shiyueji-mascot-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/shiyueji-mascot-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "./images/web/shiyueji-moon-cake-single.jpg": {
+    "fallback": "./images/web/shiyueji-moon-cake-single.jpg",
+    "width": 1600,
+    "height": 900,
+    "webp": [
+      {
+        "path": "./images/web/shiyueji-moon-cake-single-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/shiyueji-moon-cake-single-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/shiyueji-moon-cake-single-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "./images/web/shiyueji-gift-box.jpg": {
+    "fallback": "./images/web/shiyueji-gift-box.jpg",
+    "width": 1600,
+    "height": 900,
+    "webp": [
+      {
+        "path": "./images/web/shiyueji-gift-box-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/shiyueji-gift-box-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/shiyueji-gift-box-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "./images/web/shiyueji-gift-card.jpg": {
+    "fallback": "./images/web/shiyueji-gift-card.jpg",
+    "width": 1600,
+    "height": 900,
+    "webp": [
+      {
+        "path": "./images/web/shiyueji-gift-card-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/shiyueji-gift-card-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/shiyueji-gift-card-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "./images/web/shiyueji-campaign-poster.jpg": {
+    "fallback": "./images/web/shiyueji-campaign-poster.jpg",
+    "width": 1600,
+    "height": 900,
+    "webp": [
+      {
+        "path": "./images/web/shiyueji-campaign-poster-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/shiyueji-campaign-poster-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/shiyueji-campaign-poster-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "./images/web/shiyueji-social-media.jpg": {
+    "fallback": "./images/web/shiyueji-social-media.jpg",
+    "width": 1600,
+    "height": 900,
+    "webp": [
+      {
+        "path": "./images/web/shiyueji-social-media-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/shiyueji-social-media-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/shiyueji-social-media-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "./images/web/shiyueji-counter-display.jpg": {
+    "fallback": "./images/web/shiyueji-counter-display.jpg",
+    "width": 1600,
+    "height": 900,
+    "webp": [
+      {
+        "path": "./images/web/shiyueji-counter-display-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/shiyueji-counter-display-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/shiyueji-counter-display-1600.webp",
+        "width": 1600
+      }
+    ]
+  },
+  "./images/web/shiyueji-sealing-tape.jpg": {
+    "fallback": "./images/web/shiyueji-sealing-tape.jpg",
+    "width": 1600,
+    "height": 900,
+    "webp": [
+      {
+        "path": "./images/web/shiyueji-sealing-tape-480.webp",
+        "width": 480
+      },
+      {
+        "path": "./images/web/shiyueji-sealing-tape-960.webp",
+        "width": 960
+      },
+      {
+        "path": "./images/web/shiyueji-sealing-tape-1600.webp",
+        "width": 1600
+      }
+    ]
   }
 }

@@ -126,5 +126,107 @@
       9
     ],
     "extraction": "完整嵌入图像，等比例缩小，无裁切"
+  },
+  {
+    "file": "shiyueji-cover.jpg",
+    "source": "项目源文件独立包装场景图",
+    "pages": [],
+    "extraction": "原图完整呈现，等比例缩小并转换为网页格式，无裁切或改画"
+  },
+  {
+    "file": "shiyueji-logo-system.jpg",
+    "source": "结课作业.pptx 第4页",
+    "pages": [
+      4
+    ],
+    "extraction": "原图完整呈现，等比例缩小并转换为网页格式，无裁切或改画"
+  },
+  {
+    "file": "shiyueji-color-system.jpg",
+    "source": "结课作业.pptx 第6页",
+    "pages": [
+      6
+    ],
+    "extraction": "原图完整呈现，等比例缩小并转换为网页格式，无裁切或改画"
+  },
+  {
+    "file": "shiyueji-graphic-language.jpg",
+    "source": "结课作业.pptx 第7页",
+    "pages": [
+      7
+    ],
+    "extraction": "原图完整呈现，等比例缩小并转换为网页格式，无裁切或改画"
+  },
+  {
+    "file": "shiyueji-logo-specification.jpg",
+    "source": "结课作业.pptx 第10页",
+    "pages": [
+      10
+    ],
+    "extraction": "原图完整呈现，等比例缩小并转换为网页格式，无裁切或改画"
+  },
+  {
+    "file": "shiyueji-mascot.jpg",
+    "source": "结课作业.pptx 第11页",
+    "pages": [
+      11
+    ],
+    "extraction": "原图完整呈现，等比例缩小并转换为网页格式，无裁切或改画"
+  },
+  {
+    "file": "shiyueji-moon-cake-single.jpg",
+    "source": "结课作业.pptx 第14页",
+    "pages": [
+      14
+    ],
+    "extraction": "原图完整呈现，等比例缩小并转换为网页格式，无裁切或改画"
+  },
+  {
+    "file": "shiyueji-gift-box.jpg",
+    "source": "结课作业.pptx 第15页",
+    "pages": [
+      15
+    ],
+    "extraction": "原图完整呈现，等比例缩小并转换为网页格式，无裁切或改画"
+  },
+  {
+    "file": "shiyueji-gift-card.jpg",
+    "source": "结课作业.pptx 第16页",
+    "pages": [
+      16
+    ],
+    "extraction": "原图完整呈现，等比例缩小并转换为网页格式，无裁切或改画"
+  },
+  {
+    "file": "shiyueji-campaign-poster.jpg",
+    "source": "结课作业.pptx 第17页",
+    "pages": [
+      17
+    ],
+    "extraction": "原图完整呈现，等比例缩小并转换为网页格式，无裁切或改画"
+  },
+  {
+    "file": "shiyueji-social-media.jpg",
+    "source": "结课作业.pptx 第18页",
+    "pages": [
+      18
+    ],
+    "extraction": "原图完整呈现，等比例缩小并转换为网页格式，无裁切或改画"
+  },
+  {
+    "file": "shiyueji-counter-display.jpg",
+    "source": "结课作业.pptx 第19页",
+    "pages": [
+      19
+    ],
+    "extraction": "原图完整呈现，等比例缩小并转换为网页格式，无裁切或改画"
+  },
+  {
+    "file": "shiyueji-sealing-tape.jpg",
+    "source": "结课作业.pptx 第20页",
+    "pages": [
+      20
+    ],
+    "extraction": "原图完整呈现，等比例缩小并转换为网页格式，无裁切或改画"
   }
 ]

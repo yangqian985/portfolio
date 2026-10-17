@@ -107,11 +107,13 @@ for (const project of projects) {
   if (!/^[\p{L}\p{N}_-]+\.html$/u.test(project.页面) || project.页面 === 'index.html' || pages.has(project.页面)) throw Error(`项目页面名称重复或无效：${project.页面}`);
   pages.add(project.页面);
   for (const paragraph of list(project.概述, '项目.概述')) text(paragraph, '项目概述');
+  for (const item of list(project.设计思路, '项目.设计思路')) { text(item.标题, '设计思路标题'); text(item.说明, '设计思路说明'); }
+  for (const paragraph of list(project.方案回顾, '项目.方案回顾')) text(paragraph, '方案回顾');
   for (const item of list(project.交付内容, '项目.交付内容')) { text(item.名称, '交付名称'); text(item.说明, '交付说明'); }
   if (!project.PDF.toLowerCase().endsWith('.pdf')) throw Error('项目 PDF 路径必须以 .pdf 结尾');
   const pdf = await asset(project.PDF);
   if ((await readFile(pdf)).subarray(0,5).toString() !== '%PDF-') throw Error(`不是有效的 PDF：${project.PDF}`);
-  const anchors = new Set(['top','main','overview','scope','pdf','lab-lightbox']);
+  const anchors = new Set(['top','main','overview','thinking','reflection','scope','pdf','lab-lightbox']);
   for (const chapter of project.展示章节 || []) {
     if (!/^[a-z][a-z0-9-]*$/.test(chapter.锚点) || anchors.has(chapter.锚点)) throw Error(`章节锚点重复或无效：${chapter.锚点}`);
     anchors.add(chapter.锚点);
@@ -140,7 +142,7 @@ for (let i=0; i<projects.length; i++) {
   const p = projects[i];
   const next = projects[(i+1)%projects.length];
   const chapters = p.展示章节 || [];
-  const navigation = '<a href="#overview">项目概述</a>' + chapters.map(ch => `<a href="#${esc(ch.锚点)}">${esc(ch.导航名)}</a>`).join('') + '<a href="#pdf">完整 PDF</a>';
+  const navigation = '<a href="#overview">项目概述</a><a href="#thinking">设计思路</a>' + chapters.map(ch => `<a href="#${esc(ch.锚点)}">${esc(ch.导航名)}</a>`).join('') + '<a href="#reflection">方案回顾</a><a href="#pdf">完整 PDF</a>';
   const gallery = [];
   for (const [index, chapter] of chapters.entries()) {
     const figures = [];
@@ -154,6 +156,8 @@ for (let i=0; i<projects.length; i++) {
     案例导航: navigation,
     案例展示: gallery.join('\n'),
     项目概述: p.概述.map(s => `<p>${esc(s)}</p>`).join('\n'),
+    设计思路: p.设计思路.map(s => `<li><h3>${esc(s.标题)}</h3><p>${esc(s.说明)}</p></li>`).join('\n'),
+    方案回顾: p.方案回顾.map(s => `<p>${esc(s)}</p>`).join('\n'),
     交付清单: p.交付内容.map((s,i) => `<li><span class="eyebrow">${String(i+1).padStart(2,'0')}</span><h3>${esc(s.名称)}</h3><p>${esc(s.说明)}</p></li>`).join('\n'),
     项目切换: '<a href="./index.html#works">← 全部项目</a>' + (projects.length>1 ? `<a href="./${esc(next.页面)}">${esc(next.名称)} →</a>` : ''),
   }));

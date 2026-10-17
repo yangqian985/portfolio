@@ -180,6 +180,10 @@ section[id], footer[id] { scroll-margin-top: var(--space-lg); }
 .case-section h2 { font-size: 1.875rem; font-weight: 400; letter-spacing: -.04em; line-height: 1.25; margin: 0 0 var(--space-md); }
 .case-prose { max-width: 72ch; }
 .case-prose p { font-size: 1rem; color: var(--muted); margin: 0 0 var(--space-sm); }
+.case-thinking-list { list-style: none; margin: 0; padding: 0; }
+.case-thinking-list li + li { margin-top: var(--space-md); padding-top: var(--space-md); border-top: 1px solid var(--line); }
+.case-thinking-list h3 { margin: 0 0 var(--space-xs); font-size: 1.0625rem; line-height: 1.5; font-weight: 500; }
+.case-thinking-list p:last-child { margin-bottom: 0; }
 .scope-list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 0; margin: 0; list-style: none; border-block: 1px solid var(--line); }
 .scope-list li { padding: var(--space-md) var(--space-sm); border-right: 1px solid var(--line); }
 .scope-list li:first-child { padding-left: 0; }
@@ -259,6 +263,7 @@ section[id], footer[id] { scroll-margin-top: var(--space-lg); }
   .case-overview, .chapter-heading { grid-template-columns: minmax(0,1fr); gap: var(--space-md); }
   .case-index { min-height: 60px; gap: .25rem var(--space-sm); }
   .case-index a { font-size: .75rem; }
+  .case-page section[id] { scroll-margin-top: 128px; }
   .case-gallery { grid-template-columns: minmax(0,1fr); gap: var(--space-lg); }
   .pdf-panel { display: block; padding: var(--space-md); }
   .pdf-panel .button { margin-top: var(--space-md); }

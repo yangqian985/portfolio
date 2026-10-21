@@ -99,12 +99,26 @@ section[id], footer[id] { scroll-margin-top: var(--space-lg); }
 .visual-subsection-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-md); margin-bottom: var(--space-md); }
 .visual-subsection-head h3 { margin: 0; font-size: 1.25rem; line-height: 1.35; font-weight: 400; }
 .visual-subsection-head p { max-width: 310px; margin: 0; color: var(--muted); font-size: .8125rem; }
-.lab-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .65rem; }
-.lab-tile { min-width: 0; width: 100%; padding: .65rem; border: 1px solid var(--line); background: var(--surface); text-align: left; transition: border-color .2s var(--ease-out); }
+/* Hallmark · component: visual-lab · editorial · existing gallery tokens
+ * Pre-emit critique: P5 H5 E5 S5 R5 V4. Reuses the existing image-preview interaction.
+ */
+.lab-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-xl) var(--space-lg); }
+.lab-card { display: flex; flex-direction: column; min-width: 0; border-top: 1px solid var(--line); padding-top: var(--space-md); }
+.lab-meta { margin: 0 0 .5rem; color: var(--accent); font-size: .75rem; letter-spacing: .05em; }
+.lab-card h4 { margin: 0 0 var(--space-sm); font-size: 1.25rem; line-height: 1.4; font-weight: 400; min-width: 0; overflow-wrap: anywhere; }
+.lab-tile { display: block; min-width: 0; width: 100%; padding: 0; border: 1px solid var(--line); background: var(--surface); text-align: left; transition: border-color .2s var(--ease-out); }
 .lab-tile:hover { border-color: var(--accent); }
-.lab-tile img { width: 100%; height: 180px; object-fit: contain; }
-.lab-tile figcaption { display: flex; justify-content: space-between; gap: .5rem; margin-top: .65rem; color: var(--muted); font-size: .75rem; }
-.lab-tile figcaption span:last-child { color: var(--accent); }
+.lab-tile:active .lab-action { background: var(--accent-soft); }
+.lab-preview { display: block; aspect-ratio: 16 / 10; }
+.lab-preview picture, .lab-preview img { display: block; width: 100%; height: 100%; }
+.lab-preview img { object-fit: contain; }
+.lab-action { display: flex; align-items: center; justify-content: flex-end; min-height: 44px; padding: .5rem var(--space-sm); border-top: 1px solid var(--line); color: var(--accent); font-size: .8125rem; white-space: nowrap; }
+.lab-description { margin: var(--space-sm) 0; color: var(--muted); font-size: .875rem; line-height: 1.8; }
+.lab-techniques { display: flex; flex-wrap: wrap; gap: .4rem var(--space-sm); margin: auto 0 0; padding: 0; list-style: none; }
+.lab-techniques li { font-size: .75rem; color: var(--ink); }
+@media (min-width: 64rem) {
+  .lab-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 /* Hallmark · component: process-section · editorial · existing Cobalt tokens
  * Pre-emit critique: P5 H5 E5 S5 R5 V4. Static evidence figures; existing text-link interactions.
  */
@@ -159,6 +173,7 @@ section[id], footer[id] { scroll-margin-top: var(--space-lg); }
 .lightbox-head h2 { font-size: 1rem; font-weight: 500; margin: 0; }
 .lightbox-close { min-height: 44px; border: 0; background: var(--surface); padding: .5rem; font-size: .875rem; }
 .lightbox-image { width: 100%; height: auto; max-height: calc(100vh - 180px); max-height: calc(100dvh - 180px); object-fit: contain; padding: var(--space-sm); }
+.lightbox-description { margin: 0; padding: 0 var(--space-sm) var(--space-sm); color: var(--muted); font-size: .875rem; line-height: 1.8; }
 .lightbox-tools { display: flex; align-items: center; justify-content: space-between; padding: .25rem var(--space-sm); border-top: 1px solid var(--line); gap: var(--space-sm); font-size: .8125rem; }
 .lightbox-tools button { min-height: 44px; padding: .5rem; border: 0; background: var(--surface); white-space: nowrap; }
 .lightbox-tools button:hover:not(:disabled) { color: var(--accent); }
@@ -262,7 +277,6 @@ section[id], footer[id] { scroll-margin-top: var(--space-lg); }
   .side { padding-inline: 24px; }
   .content { padding-inline: 32px; }
   .small-project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .lab-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 960px) {
   .layout { grid-template-columns: 200px minmax(0, 1fr); }
@@ -301,7 +315,6 @@ section[id], footer[id] { scroll-margin-top: var(--space-lg); }
   .project-visual { height: auto; aspect-ratio: 1 / 1; }
   .section { padding-block: 40px; }
   .small-project-grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-sm); }
-  .lab-tile img { height: 170px; }
   .case-page { width: calc(100% - 40px); }
   .case-nav { min-height: 72px; }
   .case-nav nav { gap: var(--space-sm); }
@@ -324,7 +337,6 @@ section[id], footer[id] { scroll-margin-top: var(--space-lg); }
 @media (max-width: 480px) {
   .side { padding-inline: var(--space-sm); }
   .content { padding-inline: var(--space-sm); }
-  .lab-tile img { height: 140px; }
   .case-page { width: calc(100% - 32px); }
   .scope-list { grid-template-columns: minmax(0, 1fr); }
   .scope-list li, .scope-list li:nth-child(2), .scope-list li:nth-child(3) { border-right: 0; border-bottom: 1px solid var(--line); padding: var(--space-md) 0; }

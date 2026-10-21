@@ -159,11 +159,22 @@ const processCards = await Promise.all(list(data.设计流程, '设计流程').m
 <figure class="step-example"><div class="step-visual">${await image(step.过程图, step.过程图说明, false, '(min-width: 1024px) 40vw, (min-width: 761px) 65vw, calc(100vw - 32px)')}</div><figcaption><span>${esc(step.案例说明)}</span><a class="text-link" href="./${esc(step.案例页面)}#${esc(step.案例锚点)}" aria-label="查看${esc(step.案例说明)}案例">查看案例 ↗</a></figcaption></figure>
 </li>`;
 }));
+text(data.视觉探索说明, '视觉探索说明');
+text(data.视觉实验说明, '视觉实验说明');
+const labCards = await Promise.all(list(data.视觉实验, '视觉实验').map(async (item, index) => {
+  for (const key of ['名称','类别','说明','图片','图片说明']) text(item[key], `视觉实验.${key}`);
+  const number = String(index + 1).padStart(2, '0');
+  const techniques = list(item.技法, '视觉实验.技法').map(value => `<li>${esc(text(value, '实验技法'))}</li>`).join('');
+  return `<article class="lab-card" aria-labelledby="lab-title-${number}">
+<header><p class="lab-meta">EXP.${number} · ${esc(item.类别)}</p><h4 id="lab-title-${number}">${esc(item.名称)}</h4></header>
+<button class="lab-tile" type="button" data-lightbox data-full-image="${esc(fullImage(item.图片))}" data-lightbox-title="${esc(item.名称)}" data-lightbox-description="${esc(item.说明)}" aria-controls="lab-lightbox" aria-haspopup="dialog" aria-label="查看原图：${esc(item.名称)}"><span class="lab-preview">${await image(item.图片,item.图片说明,false,'(min-width: 1024px) 40vw, (min-width: 761px) 65vw, calc(100vw - 32px)')}</span><span class="lab-action" aria-hidden="true">查看原图 ↗</span></button>
+<p class="lab-description">${esc(item.说明)}</p><ul class="lab-techniques" aria-label="视觉手法">${techniques}</ul>
+</article>`;
+}));
 const homeSections = {
   项目卡片: (await Promise.all(projects.map(async (p, i) => `<a class="project" href="./${esc(p.页面)}"><div class="project-visual">${await image(p.封面, p.封面说明, i === 0)}<span class="project-open" aria-hidden="true">查看案例 ↗</span></div><div class="project-data"><div class="project-label"><span>${String(i+1).padStart(2,'0')}</span><span>${esc(p.年份)} · ${esc(p.分类短名)}</span></div><div><h3>${esc(p.首页名称)}</h3><p>${esc(p.首页说明)}</p></div><div class="project-scope"><span class="project-scope-label">核心交付物</span><ul>${p.首页交付物.map(item => `<li>${esc(item)}</li>`).join('')}</ul></div><span class="project-action" aria-hidden="true">品牌案例详情 <span>↗</span></span></div></a>`))).join('\n'),
   独立作品卡片: data.独立作品.length ? (await Promise.all(data.独立作品.map(async item => `<button class="small-project-card" type="button" data-lightbox data-full-image="${esc(fullImage(item.图片))}" aria-controls="lab-lightbox" aria-haspopup="dialog" aria-label="放大查看：${esc(item.名称)}"><span class="small-project-visual">${await image(item.图片,item.图片说明,false,'(max-width: 480px) calc(100vw - 64px), (max-width: 1200px) 40vw, 300px')}</span><span class="small-project-data"><span class="small-project-meta"><span>${esc(item.类别)}</span>${item.年份?.trim() ? `<span>${esc(item.年份.trim())}</span>` : ''}</span><span class="small-project-title">${esc(item.名称)}</span><span class="small-project-description">${esc(item.说明)}</span></span></button>`))).join('\n') : '<div class="small-project-empty"><span class="eyebrow">OPEN INDEX</span><p>独立作品会按主题陆续收录于此。</p><span>海报 · 图形 · 标志 · 包装 · 版式</span></div>',
-  实验卡片: (await Promise.all(list(data.视觉实验, '视觉实验').map(async p => `<button class="lab-tile" type="button" data-lightbox data-full-image="${esc(fullImage(p.图片))}" aria-controls="lab-lightbox" aria-haspopup="dialog" aria-label="放大查看：${esc(text(p.名称, '实验名称'))}"><figure>${await image(p.图片,p.名称,false,'(max-width: 1200px) 45vw, 260px')}<figcaption><span>${esc(p.名称)}</span><span aria-hidden="true">↗</span></figcaption></figure></button>`))).join('\n'),
-  实验说明: data.视觉实验.map(p => esc(p.名称)).join(' · '),
+  实验卡片: labCards.join('\n'),
   流程卡片: processCards.join('\n'),
   核心能力: list(profile.核心能力, '核心能力').map(p => `<li>${esc(text(p,'核心能力'))}</li>`).join(''),
   ...Object.fromEntries(['软件工具','学习工具','辅助工具'].map(key => [key, list(profile[key], key).map(value => {

@@ -86,16 +86,15 @@ function render(template, context, sections) {
 }
 
 const profile = data.个人资料;
-for (const key of ['姓名','英文名','品牌署名','职业','首页标题','简介','项目区说明','侧栏专业','关于我','专业','在校时间','课程','求职意向']) text(profile?.[key], `个人资料.${key}`);
+for (const key of ['姓名','英文名','品牌署名','职业','首页标题','简介','项目区说明','侧栏专业','关于我','学校','学历','专业','在校时间','课程','求职意向','实习类型','到岗安排']) text(profile?.[key], `个人资料.${key}`);
 text(data.年份, '年份');
+if (!/^\d{4}-\d{2}-\d{2}$/.test(text(data.更新日期, '更新日期')) || !Number.isFinite(Date.parse(data.更新日期)) || data.更新日期.slice(0,4) !== data.年份) throw Error('更新日期请使用与作品集年份一致的 YYYY-MM-DD 日期');
 const site = new URL(data.网站地址 || 'https://mywk.asia/');
 if (site.protocol !== 'https:' || site.username || site.password || site.search || site.hash || site.pathname !== '/') throw Error('网站地址必须为 HTTPS 根网址');
 const absolute = path => new URL(path, site).href;
 text(data.联系?.标题, '联系.标题');
 text(data.联系?.说明, '联系.说明');
-for (const phone of list(data.联系?.电话, '联系.电话')) {
-  if (typeof phone !== 'string' || !/^\+?[\d ()-]{5,25}$/.test(phone)) throw Error('联系.电话 格式不正确');
-}
+text(data.联系?.补充说明, '联系.补充说明');
 for (const email of list(data.联系?.邮箱, '联系.邮箱')) {
   if (typeof email !== 'string' || !/^[^\s@<>"'?#]+@[^\s@<>"'?#]+\.[^\s@<>"'?#]+$/.test(email)) throw Error('邮箱格式不正确');
 }
@@ -106,6 +105,7 @@ if ((await readFile(resumePath)).subarray(0,5).toString() !== '%PDF-') throw Err
 const contactContext = {
   邮件目标: `mailto:${data.联系.邮箱[0]}?subject=${encodeURIComponent('设计实习与项目交流 - ' + profile.姓名)}`,
   简历大小: String(Math.ceil((await stat(resumePath)).size / 1024)),
+  更新月份: data.更新日期.slice(0,7).replace('-', '.'),
 };
 const assetContext = {
   样式版本: createHash('sha256').update(await readFile(resolve(root,'assets/site.css'))).digest('hex').slice(0,12),
@@ -123,6 +123,7 @@ for (const project of projects) {
   if (!/^[\p{L}\p{N}_-]+\.html$/u.test(project.页面) || project.页面 === 'index.html' || pages.has(project.页面)) throw Error(`项目页面名称重复或无效：${project.页面}`);
   pages.add(project.页面);
   for (const paragraph of list(project.概述, '项目.概述')) text(paragraph, '项目概述');
+  for (const item of list(project.首页交付物, '项目.首页交付物')) text(item, '首页交付物');
   for (const item of list(project.设计思路, '项目.设计思路')) { text(item.标题, '设计思路标题'); text(item.说明, '设计思路说明'); }
   for (const paragraph of list(project.方案回顾, '项目.方案回顾')) text(paragraph, '方案回顾');
   for (const item of list(project.交付内容, '项目.交付内容')) { text(item.名称, '交付名称'); text(item.说明, '交付说明'); }
@@ -142,14 +143,17 @@ for (const project of projects) {
   }
 }
 const homeSections = {
-  项目卡片: (await Promise.all(projects.map(async (p, i) => `<a class="project" href="./${esc(p.页面)}"><div class="project-visual">${await image(p.封面, p.封面说明, i === 0)}<span class="project-open" aria-hidden="true">查看案例 ↗</span></div><div class="project-data"><div class="project-label"><span>${String(i+1).padStart(2,'0')}</span><span>${esc(p.年份)} · ${esc(p.分类短名)}</span></div><div><h3>${esc(p.首页名称)}</h3><p>${esc(p.首页说明)}</p></div><span class="project-action" aria-hidden="true">品牌案例详情 <span>↗</span></span></div></a>`))).join('\n'),
+  项目卡片: (await Promise.all(projects.map(async (p, i) => `<a class="project" href="./${esc(p.页面)}"><div class="project-visual">${await image(p.封面, p.封面说明, i === 0)}<span class="project-open" aria-hidden="true">查看案例 ↗</span></div><div class="project-data"><div class="project-label"><span>${String(i+1).padStart(2,'0')}</span><span>${esc(p.年份)} · ${esc(p.分类短名)}</span></div><div><h3>${esc(p.首页名称)}</h3><p>${esc(p.首页说明)}</p></div><div class="project-scope"><span class="project-scope-label">核心交付物</span><ul>${p.首页交付物.map(item => `<li>${esc(item)}</li>`).join('')}</ul></div><span class="project-action" aria-hidden="true">品牌案例详情 <span>↗</span></span></div></a>`))).join('\n'),
   独立作品卡片: data.独立作品.length ? (await Promise.all(data.独立作品.map(async item => `<button class="small-project-card" type="button" data-lightbox data-full-image="${esc(fullImage(item.图片))}" aria-controls="lab-lightbox" aria-haspopup="dialog" aria-label="放大查看：${esc(item.名称)}"><span class="small-project-visual">${await image(item.图片,item.图片说明,false,'(max-width: 480px) calc(100vw - 64px), (max-width: 1200px) 40vw, 300px')}</span><span class="small-project-data"><span class="small-project-meta"><span>${esc(item.类别)}</span>${item.年份?.trim() ? `<span>${esc(item.年份.trim())}</span>` : ''}</span><span class="small-project-title">${esc(item.名称)}</span><span class="small-project-description">${esc(item.说明)}</span></span></button>`))).join('\n') : '<div class="small-project-empty"><span class="eyebrow">OPEN INDEX</span><p>独立作品会按主题陆续收录于此。</p><span>海报 · 图形 · 标志 · 包装 · 版式</span></div>',
   实验卡片: (await Promise.all(list(data.视觉实验, '视觉实验').map(async p => `<button class="lab-tile" type="button" data-lightbox data-full-image="${esc(fullImage(p.图片))}" aria-controls="lab-lightbox" aria-haspopup="dialog" aria-label="放大查看：${esc(text(p.名称, '实验名称'))}"><figure>${await image(p.图片,p.名称,false,'(max-width: 1200px) 45vw, 260px')}<figcaption><span>${esc(p.名称)}</span><span aria-hidden="true">↗</span></figcaption></figure></button>`))).join('\n'),
   实验说明: data.视觉实验.map(p => esc(p.名称)).join(' · '),
   流程卡片: list(data.设计流程, '设计流程').map((p,i) => `<article class="step"><span class="step-number">STEP ${String(i+1).padStart(2,'0')}</span><h3>${esc(text(p.英文标题, '流程英文标题'))}</h3><h4>${esc(text(p.中文标题, '流程中文标题'))}</h4><p>${esc(text(p.说明, '流程说明'))}</p></article>`).join('\n'),
   核心能力: list(profile.核心能力, '核心能力').map(p => `<li>${esc(text(p,'核心能力'))}</li>`).join(''),
-  软件工具: list(profile.软件工具, '软件工具').map(p => `<li>${esc(text(p,'软件工具'))}</li>`).join(''),
-  联系方式: `<div><dt>联系电话</dt><dd>${data.联系.电话.map(phone => `<a href="tel:${esc(phone.replace(/[ ()-]/g,''))}">${esc(phone)}</a>`).join('')}</dd></div>` + data.联系.邮箱.map((email,i) => `<div><dt>${i === 0 ? '首选邮箱' : '备用邮箱'}</dt><dd><a href="mailto:${esc(email)}">${esc(email)}</a>${i === 0 ? `<button class="copy-button" type="button" data-copy-text="${esc(email)}" aria-label="复制首选邮箱" hidden>复制邮箱</button>` : ''}</dd></div>`).join(''),
+  ...Object.fromEntries(['软件工具','学习工具','辅助工具'].map(key => [key, list(profile[key], key).map(value => {
+    const [name, ...description] = text(value, key).split('｜');
+    return `<li><strong>${esc(name)}</strong>${description.length ? `<span>${esc(description.join('｜'))}</span>` : ''}</li>`;
+  }).join('')])),
+  联系方式: data.联系.邮箱.map((email,i) => `<div><dt>${i === 0 ? '首选邮箱' : '备用邮箱'}</dt><dd><a href="mailto:${esc(email)}">${esc(email)}</a>${i === 0 ? `<button class="copy-button" type="button" data-copy-text="${esc(email)}" aria-label="复制首选邮箱" hidden>复制邮箱</button>` : ''}</dd></div>`).join(''),
 };
 const homeTemplate = await readFile(resolve(root, 'templates/index.html'), 'utf8');
 const caseTemplate = await readFile(resolve(root, 'templates/project.html'), 'utf8');

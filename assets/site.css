@@ -53,6 +53,8 @@ section[id], footer[id] { scroll-margin-top: var(--space-lg); }
 .side-foot { margin-top: auto; font-size: .75rem; color: var(--muted); padding-top: var(--space-md); }
 .content { min-width: 0; padding: 0 54px 28px; }
 .topline { min-height: 74px; border-bottom: 1px solid var(--line); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .5rem var(--space-sm); padding-block: var(--space-sm); font-size: .75rem; letter-spacing: .08em; color: var(--muted); }
+.portfolio-edition { display: flex; flex-wrap: wrap; gap: .35rem var(--space-sm); }
+.portfolio-edition time { letter-spacing: .03em; }
 .section-head { display: flex; justify-content: space-between; align-items: end; gap: var(--space-md); margin-bottom: var(--space-md); }
 .section-head h2 { font-size: 1.875rem; line-height: 1.2; font-weight: 400; letter-spacing: -.045em; margin: .55rem 0 0; }
 .section-head > p { max-width: 310px; font-size: .875rem; color: var(--muted); margin: 0; }
@@ -67,10 +69,14 @@ section[id], footer[id] { scroll-margin-top: var(--space-lg); }
 .project:hover .project-open, .project:focus-visible .project-open { background: var(--ink); color: var(--surface); }
 .project-label { display: flex; justify-content: space-between; gap: var(--space-sm); width: 100%; font-size: .75rem; color: var(--muted); }
 .project-label > span:first-child { color: var(--accent); }
-.project-action { display: flex; justify-content: space-between; width: 100%; padding-top: .4rem; color: var(--accent); font-size: .8125rem; white-space: nowrap; }
+.project-action { display: flex; justify-content: space-between; width: 100%; padding-top: .4rem; margin-top: auto; color: var(--accent); font-size: .8125rem; white-space: nowrap; }
 .project-data { display: flex; flex-direction: column; align-items: flex-start; flex: 1; gap: .6rem; border-bottom: 1px solid var(--line); padding: var(--space-sm) 0 var(--space-md); }
 .project-data h3 { font-weight: 500; font-size: 1.125rem; line-height: 1.4; margin: 0 0 .4rem; overflow-wrap: anywhere; text-wrap: pretty; }
 .project-data p { font-size: .875rem; color: var(--muted); margin: 0; }
+.project-scope { width: 100%; padding-top: .6rem; }
+.project-scope-label { display: block; margin-bottom: .35rem; color: var(--muted); font-size: .6875rem; letter-spacing: .06em; }
+.project-scope ul { display: flex; flex-wrap: wrap; gap: .35rem .75rem; margin: 0; padding: 0; list-style: none; }
+.project-scope li { font-size: .75rem; line-height: 1.6; overflow-wrap: anywhere; }
 .project-type { font-size: .75rem; color: var(--accent); white-space: nowrap; padding-top: .1rem; margin-top: auto; }
 .section { padding-block: 56px; border-bottom: 1px solid var(--line); }
 /* Hallmark · pre-emit critique: P5 H5 E4 S5 R5 V4 · component-scope, existing gallery tokens */
@@ -116,6 +122,17 @@ section[id], footer[id] { scroll-margin-top: var(--space-lg); }
 .fact h3 { font-size: .75rem; font-weight: 500; letter-spacing: .08em; color: var(--muted); margin: 0 0 .75rem; }
 .chips { display: flex; flex-wrap: wrap; gap: .45rem; padding: 0; margin: 0; list-style: none; }
 .chips li { background: var(--surface); border: 1px solid var(--line); padding: .35rem .65rem; font-size: .875rem; }
+.tool-list { display: grid; gap: .65rem; margin: 0; padding: 0; list-style: none; }
+.tool-list li { display: grid; grid-template-columns: minmax(7rem, .75fr) minmax(0, 1.25fr); gap: .25rem .75rem; padding-bottom: .65rem; border-bottom: 1px solid var(--line); }
+.tool-list strong { font-size: .875rem; line-height: 1.6; font-weight: 500; }
+.tool-list span { color: var(--muted); font-size: .8125rem; line-height: 1.7; }
+.tool-support { margin-top: var(--space-sm); }
+.tool-support h4 { margin: var(--space-sm) 0 .5rem; font-size: .75rem; font-weight: 400; color: var(--muted); }
+.tool-list-secondary strong { color: var(--muted); font-size: .8125rem; font-weight: 400; }
+.about .education-school { color: var(--ink); }
+.about .internship-type { margin-top: .75rem; color: var(--accent); font-size: .8125rem; }
+.about .availability { margin-top: .4rem; font-size: .8125rem; }
+.career { margin-top: var(--space-md); padding-top: var(--space-md); border-top: 1px solid var(--line); }
 .contact { padding-block: var(--space-xl); }
 .contact h2 { font-size: clamp(2rem, 4.4vw, 3.25rem); font-weight: 400; line-height: 1.12; letter-spacing: -.05em; margin: .75rem 0 var(--space-md); max-width: 720px; overflow-wrap: anywhere; }
 .contact-info { display: flex; flex-wrap: wrap; gap: .65rem var(--space-md); font-size: .875rem; }

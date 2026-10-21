@@ -26,7 +26,7 @@
 <a class="skip-link" href="#main">
    跳到主要内容
   </a>
-<!-- Approved direction 2: a quiet sidebar frames the two existing brand cases. -->
+<!-- Approved direction 2: a quiet sidebar frames the selected brand cases. -->
 <div class="layout">
 <aside class="side">
 <a class="brand" href="#top">{{个人资料.品牌署名}}</a>
@@ -60,7 +60,7 @@
 </aside>
 <main class="content" id="main">
 <div class="topline">
-<span>PORTFOLIO · {{年份}}</span>
+<span class="portfolio-edition">PORTFOLIO · {{年份}} <time datetime="{{更新日期}}">更新 {{更新月份}}</time></span>
 <span>SELECTED WORKS — {{项目数量}}</span>
 </div>
 <section aria-labelledby="works-heading" id="works">
@@ -127,8 +127,15 @@
          Education / 教育背景
         </div>
 <h3>{{个人资料.专业}}</h3>
+<p class="education-school">{{个人资料.学校}} · {{个人资料.学历}}</p>
 <p>{{个人资料.在校时间}}</p>
 <p>{{个人资料.课程}}</p>
+</div>
+<div class="fact career">
+<h3>Target Roles / 求职意向</h3>
+<p>{{个人资料.求职意向}}</p>
+<p class="internship-type">{{个人资料.实习类型}}</p>
+<p class="availability">{{个人资料.到岗安排}}</p>
 </div>
 </div>
 <div>
@@ -142,13 +149,13 @@
 <h3>
          Software &amp; Tools / 软件工具
         </h3>
-<ul class="chips">{{{软件工具}}}</ul>
+<ul class="tool-list">{{{软件工具}}}</ul>
+<div class="tool-support">
+<h4>持续学习</h4>
+<ul class="tool-list tool-list-secondary">{{{学习工具}}}</ul>
+<h4>辅助工作流</h4>
+<ul class="tool-list tool-list-secondary">{{{辅助工具}}}</ul>
 </div>
-<div class="fact">
-<h3>
-         Target Roles / 求职意向
-        </h3>
-<p>{{个人资料.求职意向}}</p>
 </div>
 </div>
 </div>
@@ -166,7 +173,7 @@
 <a class="button button-secondary" href="{{联系.简历}}" target="_blank" rel="noopener">查看简历 ↗</a>
 <a class="text-link" href="{{联系.简历}}" download="{{个人资料.姓名}}_设计实习简历.pdf">下载 PDF ↓</a>
 </div>
-<p class="resume-note">A4 · PDF · {{简历大小}} KB</p>
+<p class="resume-note">A4 · PDF · {{简历大小}} KB<br/>{{联系.补充说明}}</p>
 </div>
 <div>
 <dl class="contact-info">{{{联系方式}}}</dl>

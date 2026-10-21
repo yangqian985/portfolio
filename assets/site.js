@@ -67,6 +67,7 @@ const lightbox = document.querySelector('#lab-lightbox');
 if (lightbox && typeof lightbox.showModal === 'function') {
   const image = lightbox.querySelector('img');
   const title = lightbox.querySelector('h2');
+  const description = lightbox.querySelector('[data-lightbox-description]');
   const previous = lightbox.querySelector('[data-image-prev]');
   const next = lightbox.querySelector('[data-image-next]');
   const counter = lightbox.querySelector('[data-image-counter]');
@@ -79,7 +80,13 @@ if (lightbox && typeof lightbox.showModal === 'function') {
     const thumbnail = button.querySelector('img');
     image.src = button.dataset.fullImage || thumbnail.src;
     image.alt = thumbnail.alt;
-    title.textContent = thumbnail.alt;
+    title.textContent = button.dataset.lightboxTitle || thumbnail.alt;
+    if (description) {
+      description.textContent = button.dataset.lightboxDescription || '';
+      description.hidden = !description.textContent;
+      if (description.textContent) lightbox.setAttribute('aria-describedby', description.id);
+      else lightbox.removeAttribute('aria-describedby');
+    }
     if (counter) counter.textContent = `${active + 1} / ${buttons.length}`;
     if (previous) previous.disabled = active === 0;
     if (next) next.disabled = active === buttons.length - 1;
